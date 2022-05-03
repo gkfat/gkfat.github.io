@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            前後端＆資料庫系統建置心得 |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">前後端＆資料庫系統建置心得</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-03-19 22:00:35</span>
+        <span class="mobile">2021-03-19 22:00</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/fullStack/">fullStack</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（<del>反正有 Stack Overflow</del>）！</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="系統架構"><a href="#系統架構" class="headerlink" title="系統架構"></a>系統架構</h2><p>要從無到有將系統建起來，首先需要了解系統的架構。廢話不多說，先上圖。</p>
+<p><img src="https://i.imgur.com/0RqkfVN.png"></p>
+<p>這個系統是長成這個鬼樣子的，至於為什麼要用這麼多種語言設計，不要問我，去問前人。總之這系統上的各套服務，原本是架在不同 Server 的，而我這次要做的事情就是將它們全部搬到同個 Server 運行。</p>
+<p>經過一陣子的研究後，要達成目標，需要下列技術：</p>
+<ol>
+<li>Linux 基本操作</li>
+<li>資料庫安裝（MariaDB &amp; MongoDB）</li>
+<li>Node.js build &amp; deploy</li>
+<li>Golang build &amp; deploy</li>
+<li>Angular build &amp; deploy</li>
+<li>Service config（systemd）</li>
+<li>Web Server config（httpd）</li>
+</ol>
+<blockquote>
+<p>補充一下困難程度，在開始做這件事前，我會的只有 5 而已…</p>
+</blockquote>
+<hr>
+<h2 id="資料庫建置"><a href="#資料庫建置" class="headerlink" title="資料庫建置"></a>資料庫建置</h2><p>好！那麼首先要嘗試的，就是資料庫的安裝。</p>
+<p>由於對這兩套資料庫完全不了解，我先在本機（Mac）試著用 <code>homebrew</code> 安裝了幾次。現在回過頭看覺得挺好笑的，因為後來才知道在 Mac 安裝跟在 <code>Linux</code> 安裝，完全是兩回事…</p>
+<h3 id="MariaDB"><a href="#MariaDB" class="headerlink" title="MariaDB"></a>MariaDB</h3><ul>
+<li>MacOS 安裝：<a class="link"   target="_blank" rel="noopener" href="https://mariadb.com/kb/en/installing-mariadb-on-macos-using-homebrew/" >https://mariadb.com/kb/en/installing-mariadb-on-macos-using-homebrew/<i class="fas fa-external-link-alt"></i></a></li>
+<li>Linux 安裝：<a class="link"   target="_blank" rel="noopener" href="https://blog.gtwang.org/linux/centos-7-install-mariadb-mysql-server-tutorial/" >https://blog.gtwang.org/linux/centos-7-install-mariadb-mysql-server-tutorial/<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><ul>
+<li>MacOS 安裝：<a class="link"   target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/" >https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/<i class="fas fa-external-link-alt"></i></a></li>
+<li>Linux 安裝：<a class="link"   target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" >https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<blockquote>
+<p>目標伺服器是 <code>Linux CentOS 7</code>，也是因此契機才稍微去瞭解了下 <code>Linux</code> 作業系統，才知道原來有非常多版本。有興趣知道更多可參考這篇：<a class="link"   target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/linux-server-os-survey/" >黑暗執行緒 - 我的 Linux 作業系統考察<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>安裝了資料庫後才是真正的開始，會遇到 root 密碼無法登入問題、安全性設定問題等怪事，這部分就不細說了，總之 Stack Overflow 是你我的好朋友。</p>
+<hr>
+<h2 id="Node-js-專案部署"><a href="#Node-js-專案部署" class="headerlink" title="Node.js 專案部署"></a>Node.js 專案部署</h2><p>完成資料庫的安裝後，接著是 <code>Form Service</code>，因為這套要先運行起來，<code>Main Service</code> 才能運行。由於在前端打滾了一年，多少還是懂一點 NPM，因此只要稍微讀一下 <code>Package.json</code>，就大概知道操作指令有哪些了。</p>
+<p>接著，做下面這些事情：</p>
+<ul>
+<li>將專案資料夾複製到伺服器的專案路徑下</li>
+<li>建立服務的設定檔（&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;<service_name>.service）</li>
+<li>在專案路徑執行 <code>npm install</code> 以下載依賴套件</li>
+<li>啟動服務：<code>systemctl start &lt;service_name&gt;.service</code></li>
+<li>檢查服務：<code>systemctl status &lt;service_name&gt;.service</code></li>
+<li>開放 tcp 連線 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>在服務設定檔中會指定專案路徑，以及在這個路徑底下要 <code>Linux</code> 執行什麼指令，因此熟悉的 <code>npm run start</code> 就會寫在這裡。</p>
+</blockquote>
+<hr>
+<h2 id="Golang-專案部署"><a href="#Golang-專案部署" class="headerlink" title="Golang 專案部署"></a>Golang 專案部署</h2><p>在測試過 <code>Form Service</code> 正常運行後，就可以來接著架 <code>Main Service</code> 了。由於我完全不會 <code>Golang</code>，因此花了一些時間從頭學習，也整理出幾個 <code>Go</code> 常用的套件，找了一些 tutorial 來做。</p>
+<p><code>Golang</code> 常用套件：</p>
+<ul>
+<li><code>Gin</code>：http server</li>
+<li><code>Gorm</code>：MariaDB 操作</li>
+<li><code>Mongo</code>：MongoDB 操作</li>
+<li><code>Cron</code>：排程設定</li>
+<li><code>Cobra</code>：指令處理</li>
+<li><code>Jwt</code>：認證處理</li>
+</ul>
+<p>熟悉了基本的結構後，就可以試著來 Build Project 了。在打包 <code>Golang</code> 成應用程式時，必須要注意要運行的環境規格（<code>GOOS</code>、<code>GOARCH</code>）。</p>
+<p>接著，做下面這些事情：</p>
+<ul>
+<li>將專案資料夾複製到伺服器的專案路徑下</li>
+<li>建立服務的設定檔（&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;<service_name>.service）</li>
+<li>啟動服務：<code>systemctl start &lt;service_name&gt;.service</code></li>
+<li>檢查服務：<code>systemctl status &lt;service_name&gt;.service</code></li>
+<li>開放 tcp 連線 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>因為 <code>Main Service</code> 需要接收 http request，因此 tcp 一定要確認好。</p>
+</blockquote>
+<hr>
+<h2 id="Angular-專案部署"><a href="#Angular-專案部署" class="headerlink" title="Angular 專案部署"></a>Angular 專案部署</h2><p>資料庫跟前面兩套系統 run 起來之後，終於來到熟悉的 <code>Angular</code> 專案部署。因為很常做，這裡就不廢話，按照 <code>Package.json</code> 裡的說明 Build，然後複製到伺服器的專案路徑資料夾即可。</p>
+<p>有一點可以延伸討論，前人有為這個專案留下 <code>Shell Script</code> 部署檔，讓打包部署流程變得方便許多，這次在仔細研讀後，也對整個流程到底是做了哪些事情有進一步的認識。或許之後也可以寫一些 <code>Shell Script</code> 小工具。</p>
+<hr>
+<h2 id="Linux-設定"><a href="#Linux-設定" class="headerlink" title="Linux 設定"></a>Linux 設定</h2><p>在部署上面前後端程式及資料庫的過程中，一直有碰到陌生的未知領域，在查找了好一陣子之後，整理出下面三塊 <code>Linux</code> 設定。</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>通常後端服務都會作為 Service 運行，而在 <code>Linux</code> 想要運行服務，很常會用到的一些基本指令（也是我在這次架站過程中反覆用到的指令），整理如下：</p>
+<ul>
+<li><code>Lsof</code>：<ul>
+<li>查詢目前使用中的 port 及 process id：<code>lsof -n -i</code></li>
+<li>查詢特定 port 的服務：<code>lsof -n -i:&lt;port_number&gt;</code></li>
+<li>清除 PID：<code>kill &lt;PID&gt;</code></li>
+</ul>
+</li>
+<li><code>Systemctl</code>：<ul>
+<li>查看所有服務狀態：<code>systemctl --type=service</code></li>
+<li>查看特定服務狀態：<code>systemctl status &lt;service name&gt;</code></li>
+<li>啟動服務：<code>systemctl start &lt;service name&gt;</code></li>
+<li>停止服務：<code>systemctl stop &lt;service name&gt;</code></li>
+<li>重啟服務：<code>systemctl restart &lt;service name&gt;</code></li>
+<li>查看服務的設定檔：<code>systemctl cat &lt;service name&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h3><p>後端服務 run 起來時我也稍微卡了一下，因為從 local 明明就可以打到 API，不知為何換個 ip 就一直失敗。後來查到原來是防火牆沒設定好，真相往往就這麼簡單。</p>
+<p>常用指令：</p>
+<ul>
+<li>列出使用中的 port：<code>firewall-cmd --list-ports</code></li>
+<li>打開 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+<li>永久打開 port：<code>firewall-cmd --permanent --add-port=&lt;port_number&gt;/tcp</code></li>
+<li>重啟：<code>firewall-cmd --reload</code></li>
+<li>關閉 port：<code>firewall-cmd --remove-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>其實除了預設的 80 Port 外，應盡量少讓其他人可以透過 tcp 直接連進伺服器會比較好，這部分的知識我尚未具備，還需要深入精進。</p>
+</blockquote>
+<h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3><p>這裡也是卡很久，但其實若對 <code>httpd</code> 有些了解，應該是很簡單的事，因為就是<code>Directory</code> 跟 <code>Proxy Reverse</code> 兩件事而已。</p>
+<blockquote>
+<p>其實應該還缺 SSL 憑證相關的東西，但因為這次沒有接觸到設定網域名稱，之後有碰到再說吧！目前遇到的都還不是非常難的問題，一樣是那句話，凡事問 Stack Overflow 就有解了XD（例如說 Apache config 檔案在哪…<a class="link"   target="_blank" rel="noopener" href="https://www.liquidweb.com/kb/apache-configuration-centos/" >Where is the Apache configuration in CentOS<i class="fas fa-external-link-alt"></i></a>）</p>
+</blockquote>
+<hr>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>從研究各套 code 到嘗試建置的過程，前後加起來共 2 週，對一個 Senior 來說可能嫌太久（或許 Senior 只需要 3 天？），但我給自己一個正面的肯定。經過這次的磨練，補強知識的同時也在訓練自學能力，覺得能解這次任務實在是太好了！</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：前後端＆資料庫系統建置心得</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2021-03-19 22:00:35</li>
+        <li>
+            永久連結：https://gkfat.github.io/2021/03/19/system-deploying/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/fullStack/">#fullStack</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/28/git-flow/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git 學習筆記 - 如何使用 Git 做版本控制</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/01/26/self-manage/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">自我管理心法（一）：為什麼要自我管理？</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">系統架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E5%BB%BA%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">資料庫建置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MariaDB"><span class="nav-number">2.1.</span> <span class="nav-text">MariaDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">2.2.</span> <span class="nav-text">MongoDB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js-%E5%B0%88%E6%A1%88%E9%83%A8%E7%BD%B2"><span class="nav-number">3.</span> <span class="nav-text">Node.js 專案部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Golang-%E5%B0%88%E6%A1%88%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">Golang 專案部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Angular-%E5%B0%88%E6%A1%88%E9%83%A8%E7%BD%B2"><span class="nav-number">5.</span> <span class="nav-text">Angular 專案部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-%E8%A8%AD%E5%AE%9A"><span class="nav-number">6.</span> <span class="nav-text">Linux 設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">6.1.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firewall"><span class="nav-number">6.2.</span> <span class="nav-text">Firewall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Server"><span class="nav-number">6.3.</span> <span class="nav-text">Web Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">7.</span> <span class="nav-text">結論</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

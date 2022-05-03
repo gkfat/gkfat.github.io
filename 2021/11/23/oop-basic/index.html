@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            OOP 學習筆記 - 什麼是物件導向程式設計？跟前端開發有什麼關係？ |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">OOP 學習筆記 - 什麼是物件導向程式設計？跟前端開發有什麼關係？</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-23 19:57:57</span>
+        <span class="mobile">2021-11-23 19:57</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/OOP/">OOP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/TypeScript/">TypeScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/SOLID/">SOLID</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.5k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>近來在開發網頁時，逐漸能感受到事先訂好類別規格的重要性。比方說，這次要新增的功能是「股票觀察清單」，若能事先定義好觀察清單、觀察對象（EX: 股票）、觀察清單的行為（EX: 建立、編輯、移除），那麼在開發時會清楚許多，往後若要為這功能增加或改動內容（維護階段），都可以從源頭來改。降低 bug 發生機率的同時，也能讓其他同事更迅速理解自己寫的架構，減少溝通鴻溝。為此，該來將先前粗略讀過的「物件導向程式設計」概念，拿出來再理解一遍了。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="什麼是物件導向程式設計（Object-Oriented-Programming）？"><a href="#什麼是物件導向程式設計（Object-Oriented-Programming）？" class="headerlink" title="什麼是物件導向程式設計（Object-Oriented Programming）？"></a>什麼是物件導向程式設計（Object-Oriented Programming）？</h2><blockquote>
+<p>根據 <a class="link"   target="_blank" rel="noopener" href="https://www.sanmin.com.tw/product/index/000747473" >《UML 物件導向系統分析與設計》<i class="fas fa-external-link-alt"></i></a>，在物件導向設計中，類別（Class）的實例（Instance）就叫做物件（Object）。物件作為程式的基本單元，每個物件都是獨立的個體，應該要能夠接收資料、處理資料、傳出資料，採用物件導向來設計程式，能夠大大提升程式的靈活性與可維護性。</p>
+</blockquote>
+<ul>
+<li>類（Class）：定義一個東西的抽象特徵。包含資料的形式以及對資料的操作。</li>
+<li>物件（Object）：是類的實例，類產生的具體例子。</li>
+</ul>
+<p>就像這類文章常見的那個例子一樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 宣告一個 class，包含屬性以及方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    name;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">pname</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = pname;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">murmur</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;我是&quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;嗎?&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告實例</span></span><br><span class="line"><span class="keyword">let</span> ming = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;小明&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> hua  = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;小花&quot;</span>);</span><br><span class="line">ming.<span class="title function_">murmur</span>();  <span class="comment">// 我是小明嗎?</span></span><br><span class="line">hua.<span class="title function_">murmur</span>();   <span class="comment">// 我是小花嗎?</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Person</code> 是一個 Class，而 <code>new Person()</code> 則會建立一個實例 Object。</p>
+<p>在初步了解物件導向是什麼了之後，就來看看它有哪些特性，以及需要依照怎樣的原則來設計程式吧。</p>
+<hr>
+<h2 id="物件導向四大特性"><a href="#物件導向四大特性" class="headerlink" title="物件導向四大特性"></a>物件導向四大特性</h2><p>物件導向有四個特性：</p>
+<ul>
+<li>抽象（Abstraction）</li>
+<li>封裝（Encapsulation）</li>
+<li>繼承（Inheritance）</li>
+<li>多型（Polymorphism）</li>
+</ul>
+<p>說真的，當時的我看到這些鬼東西，真是害怕極了。如今卻能大致理解這四項特性分別是在描述什麼，應該是有所成長了吧。</p>
+<h3 id="1-抽象（Abstraction）"><a href="#1-抽象（Abstraction）" class="headerlink" title="1. 抽象（Abstraction）"></a>1. 抽象（Abstraction）</h3><p>我自己覺得這可能是最難理解的概念，但是一但理解了抽象性，對於思考程式如何設計會有相當大的幫助。其實換個角度想，我們在生物課不就學過抽象性了嗎？</p>
+<blockquote>
+<p>不信你看：<a class="link"   target="_blank" rel="noopener" href="https://www.itsfun.com.tw/%E7%95%8C%E9%96%80%E7%B6%B1%E7%9B%AE%E7%A7%91%E5%B1%AC%E7%A8%AE/wiki-169944-298424" >生物分類法 - 維基百科<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>就我目前的理解，抽象就是一種分類的方法。透過整理來將一類對象抽象化，而定義出這個類別的特性及行為，以幫助人快速識別對象。這個道理是從大自然中學習來的，而套用在程式設計上也相當合用。</p>
+<p>就像上面的例子一樣，小明與小花都屬於 <code>Person</code> 這個 Class，但各自的 <code>name</code> 及 <code>murmur</code> 的內容卻又不同。</p>
+<h3 id="2-封裝（Encapsulation）"><a href="#2-封裝（Encapsulation）" class="headerlink" title="2. 封裝（Encapsulation）"></a>2. 封裝（Encapsulation）</h3><p>封裝是將 Class 的部份內容包裝、隱藏起來的方法。這是一種防止外界呼叫、存取物件內部實作細節的手段。聽起來很美好，問題是親愛的 <code>JavaScript</code> 中並沒有簡單明瞭的設計來實現物件導向封裝特性。幸好，我們有 <code>TypeScript</code>。透過 <code>public</code> <code>private</code> <code>protected</code> 就能夠快速簡便地讓開發者及系統辨別公開或私有屬性。</p>
+<h3 id="3-繼承（Inheritance）"><a href="#3-繼承（Inheritance）" class="headerlink" title="3. 繼承（Inheritance）"></a>3. 繼承（Inheritance）</h3><p>一個物件有時會在父類別底下延伸出子類別，子類別會比父類別更加具體（但不是實例），且繼承父類別的屬性。</p>
+<p>比方說開頭提到的觀察清單類別，因為需要能夠容納「股票」類別以及「外匯」類別，就可以再分為「股票觀察清單類」及「外匯觀察清單類」。源頭都屬於觀察清單類別，但各自又多了部分不同的屬性。</p>
+<h3 id="4-多型（Polymorphism）"><a href="#4-多型（Polymorphism）" class="headerlink" title="4. 多型（Polymorphism）"></a>4. 多型（Polymorphism）</h3><p>由繼承產生的相關的不同類別，這些類別對同樣的呼叫，會給出不同的反應。這是什麼意思呢？讓我們修改一下開頭的案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="title function_">murmur</span>(<span class="params"></span>)&#123;&#125; <span class="comment">// 此處定義了一個方法，但沒有內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MalePerson</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Person</span> &#123;</span><br><span class="line">    <span class="title function_">murmur</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;我是男漢子!&quot;</span>); <span class="comment">// 定義內容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FemalePerson</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Person</span> &#123;</span><br><span class="line">    <span class="title function_">murmur</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;我是女漢子!&quot;</span>); <span class="comment">// 定義內容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> man = <span class="keyword">new</span> <span class="title class_">MalePerson</span>();</span><br><span class="line"><span class="keyword">let</span> woman = <span class="keyword">new</span> <span class="title class_">FemalePerson</span>();</span><br><span class="line">man.<span class="title function_">murmur</span>();   <span class="comment">// 我是男漢子!</span></span><br><span class="line">woman.<span class="title function_">murmur</span>(); <span class="comment">// 我是女漢子!</span></span><br></pre></td></tr></table></figure>
+
+<p>如上所示，在新類別繼承了 <code>Person</code> 這個類別時，也一併繼承了它的 <code>murmur()</code> 方法，並各自覆蓋了方法的內容。接著建立實例並呼叫此方法的時候，就會印出各自的內容，這就是多型。</p>
+<hr>
+<h2 id="物件導向設計-SOLID-原則"><a href="#物件導向設計-SOLID-原則" class="headerlink" title="物件導向設計 SOLID 原則"></a>物件導向設計 SOLID 原則</h2><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/SOLID_(%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1)" >SOLID (物件導向設計) - 維基百科<i class="fas fa-external-link-alt"></i></a><br>每個專案沒聽到一次就渾身不對勁的 S.O.L.I.D. 原則</p>
+</blockquote>
+<p><code>SOLID</code> 原則是取以下五個原則的開頭組合而成，剛好也表示依循這樣原則的程式設計會很「穩固」。因為要深入淺出這五個原則，以我目前的功力還辦不到，所以只能簡單做個筆記。有錯誤的部分也歡迎隨時指正。</p>
+<ul>
+<li>單一職責原則（Single responsibility principle, SRP）</li>
+<li>開放封閉原則（Open-Close principle, OCP）</li>
+<li>里氏替換原則（Liskov substitution principle, LSP）</li>
+<li>介面隔離原則（Interface segregation principle, ISP）</li>
+<li>依賴反轉原則（Dependency inversion principle, DIP）</li>
+</ul>
+<h3 id="1-單一職責原則-Single-responsibility-principle-SRP"><a href="#1-單一職責原則-Single-responsibility-principle-SRP" class="headerlink" title="1. 單一職責原則(Single responsibility principle, SRP)"></a>1. 單一職責原則(Single responsibility principle, SRP)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一個模組應該只對一個角色負責。</span><br></pre></td></tr></table></figure>
+
+<p>依我的理解，這意思就是一個 <code>calcTotal()</code> 的函式，不應該同時做多件事情，例如修改 <code>CompanyWallet.total</code> 以及 <code>CustomerWallet.total</code>，以防哪天因為變更了一點點 <code>calcTotal()</code> 的程式碼，卻影響到其他內容，這是會出大事的。</p>
+<p>那麼依循這個原則，可以這樣做：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一個抽象的介面，包含計算函式但不實作</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TotalCalculator</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">function</span> <span class="title function_">calcTotal</span>(<span class="params"></span>): <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 各自繼承並實作計算函式的內容</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CompanyWallet</span> <span class="keyword">extends</span> <span class="title class_ inherited__">TotalCalculator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">total</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">function</span> <span class="title function_">calcTotal</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 公司的計算方式</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CustomerWallet</span> <span class="keyword">extends</span> <span class="title class_ inherited__">TotalCalculator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">total</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">function</span> <span class="title function_">calcTotal</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 客戶的計算方式</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前的我還不能很好地舉例解釋單一職責原則，或許是因為尚未滲透進骨髓，必須再繼續加深印象才行。</p>
+<h3 id="2-開放封閉原則-Open-Close-principle-OCP"><a href="#2-開放封閉原則-Open-Close-principle-OCP" class="headerlink" title="2. 開放封閉原則(Open-Close principle, OCP)"></a>2. 開放封閉原則(Open-Close principle, OCP)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">開放擴展：當需求變更時，模組可以擴充功能。</span><br><span class="line">封閉修改：當進行擴沖時，模組不需修改既有的程式碼。</span><br></pre></td></tr></table></figure>
+
+<p>當一個已經完成的模組要加上新功能時，不應修改原本的程式碼，否則很有可能會在想像不到的地方產生 bug，這是很好理解的。</p>
+<h3 id="3-里氏替換原則-Liskov-substitution-principle-LSP"><a href="#3-里氏替換原則-Liskov-substitution-principle-LSP" class="headerlink" title="3. 里氏替換原則(Liskov substitution principle, LSP)"></a>3. 里氏替換原則(Liskov substitution principle, LSP)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">子類別要能取代它的父類別。</span><br></pre></td></tr></table></figure>
+
+<p>大意是說，子類別繼承了父類別，實作時需依循下列原則：</p>
+<ul>
+<li>子類別的先決條件不能比父類強，但可以比父類弱</li>
+<li>子類別的後置條件不能比父類弱，但可以比父類強</li>
+<li>父類別的不變條件必須被繼承</li>
+</ul>
+<p>乍看很抽象，但用具體例子來看的話，就很好理解。基本上就是子類別實作的範疇不應跳脫父類別，而應該在父類別的範疇內實作。</p>
+<h3 id="4-介面隔離原則-Interface-segregation-principle-ISP"><a href="#4-介面隔離原則-Interface-segregation-principle-ISP" class="headerlink" title="4. 介面隔離原則(Interface segregation principle, ISP)"></a>4. 介面隔離原則(Interface segregation principle, ISP)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用不到的功能，不應被呼叫。</span><br></pre></td></tr></table></figure>
+
+<p>一樣又是很抽象的說明，具體舉個例子就是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Website</span> &#123;</span><br><span class="line">    public <span class="keyword">function</span> <span class="title function_">login</span>(<span class="params"></span>);</span><br><span class="line">    public <span class="keyword">function</span> <span class="title function_">logout</span>(<span class="params"></span>);</span><br><span class="line">    public <span class="keyword">function</span> <span class="title function_">adminMode</span>(<span class="params"></span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    site = <span class="keyword">new</span> <span class="title class_">Website</span>();</span><br><span class="line">    site.<span class="title function_">login</span>();</span><br><span class="line">    site.<span class="title function_">logout</span>();</span><br><span class="line">    site.<span class="title function_">adminMode</span>(); <span class="comment">// 明明是 client 為什麼可以開啟 admin?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因為 <code>adminMode()</code> 並不是開放給所有人使用的，但偏偏 client 又可以呼叫它，這就表示違反了介面隔離原則。此時需要將 <code>adminMode()</code> 隔離出來，只有管理員可以實作這個介面，並呼叫本功能。</p>
+<h3 id="5-依賴反轉原則-Dependency-inversion-principle-DIP"><a href="#5-依賴反轉原則-Dependency-inversion-principle-DIP" class="headerlink" title="5. 依賴反轉原則(Dependency inversion principle, DIP)"></a>5. 依賴反轉原則(Dependency inversion principle, DIP)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">高層模組不應依賴低層模組，而都應該依賴抽象。</span><br></pre></td></tr></table></figure>
+
+<p>當高低模組之間有依賴關係時，此時就會有危險產生。萬一高層模組依賴低層模組，而低層模組的實作內容修改了，高層模組就會發生預期外的結果，要不然就必須去修改高層模組內容，出現高耦合的狀況。</p>
+<p>為了避免，可以在高低模組之間抽出一個抽象的介面，透過抽象去實作方法，這樣就可以降低耦合。</p>
+<p>以上就是 <code>SOLID</code> 原則。以我目前的程度，大概只有一知半解，而且要依照原則來設計程式，又比單純理解物件導向更難了。</p>
+<p>但我相信 <code>OOP</code> 能讓程式變得更好，所以我會持續精進 <code>SOLID</code>！</p>
+<hr>
+<h2 id="OOP-如何應用在前端開發？"><a href="#OOP-如何應用在前端開發？" class="headerlink" title="OOP 如何應用在前端開發？"></a>OOP 如何應用在前端開發？</h2><p>前端工程師在學習的過程中幾乎都會看到「<code>JavaScript</code> 是一個基於物件導向的語言」這句話，接著就會看到原型鏈（Prototype）相關的介紹。當時的我還不是很能把這兩件事串在一起，如今看來之間的關聯再明顯不過了。</p>
+<p>再回到前面的例子，其實 <code>JavaScript</code> 的 Class 並不是真正的類別，而只是個偽裝過的 function，也就是常聽人家說的那一句：「Class 只是 ES6 的語法糖」。但是 ES6 究竟為何要這樣欺騙我們的感情呢？還不是為了讓你開發上更方便（巴頭）！關於這件事，MDN 是這樣說的：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" >繼承與原型鏈 - MDN<i class="fas fa-external-link-alt"></i></a><br>JavaScript 是個沒有實做 class 關鍵字的動態語言，所以會對那些基於類別（class-based）語言（如 Java 或 C++）背景出身的開發者來說會有點困惑。（在 ES2015 有提供 class 關鍵字，但那只是個語法糖，JavaScript 仍然是基於原型（prototype-based）的語言）。</p>
+</blockquote>
+<p>我目前對於 <code>Prototype</code> 還沒有系統性地去理解過，只大致上知道是怎麼回事而已，但這不是本篇主旨，所以先跳過。</p>
+<p>我關心的是，究竟 <strong>OOP 如何應用在前端開發</strong>？</p>
+<h3 id="搭配神兵利器-TypeScript"><a href="#搭配神兵利器-TypeScript" class="headerlink" title="搭配神兵利器 TypeScript"></a>搭配神兵利器 <code>TypeScript</code></h3><p>因為目前公司使用的前端框架是 <code>Angular</code>，使用的主要語言是 <code>TypeScript</code>，也因此潛移默化地習慣了事先定義型別、類別的作法，自然養成好習慣。現在要我用原生 JS 開發，如果要像 <code>TypeScript</code> 那樣定義型別，要花一大堆功夫，心裡會很不是滋味。</p>
+<p>如果 <code>OOP</code> 搭配使用 <code>TypeScript</code>，那麼在開發事前就能將類別、資料型別定義得更清楚了，倘若再用上 <code>UML</code>（這才發現我沒寫過 <code>UML</code> 的筆記，看來也該補一篇了）來分析專案，在前期就徹底分析需求，就可以大大減少遺漏需求的問題，也可以減少發生後端都已經部署好 API 了，前端卻在串接過程中發現資料格式不合用想要改結構的情況。這有時候是會影響到 DB schema 的，若能事先定好，就能在前期發現該釐清的事項。</p>
+<p>因此接下來我會用 <code>TypeScript</code> 來呈現 <code>JavaScript</code> 的部分。</p>
+<h3 id="從「物件」作為出發點來思考"><a href="#從「物件」作為出發點來思考" class="headerlink" title="從「物件」作為出發點來思考"></a>從「物件」作為出發點來思考</h3><p>程式是「本質先於存在」的產物，必須先有「需求」，而後才有對應的「解決方案」。若要在專案開發中導入 <code>OOP</code>，必須從需求分析切入，後續發展才能順暢。讓我們先假設一個需求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">開發一個檔案上傳管理系統。</span><br></pre></td></tr></table></figure>
+
+<p>好啦，老實說就是這個經驗：<a href="https://gkfat.github.io/2021/09/05/python-file-upload-service">後端學習筆記 - 來寫一個串接 NAS 的檔案管理服務吧！</a>，不過當時的我並沒有將物件導向設計應用進去，因此若現在回頭看程式碼，不吐血才怪。</p>
+<p>現在從頭來思考這個需求，我會先做 <code>UML</code> 中的類圖分析，拆解出這個需求中包含下列類（Class）：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 檔案</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UploadFile</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="attr">id</span>: <span class="built_in">number</span>;      <span class="comment">// 檔案 ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">name</span>: <span class="built_in">string</span>;    <span class="comment">// 檔名</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">content</span>: <span class="built_in">string</span>; <span class="comment">// 檔案內容，以 base64 儲存</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">path</span>: <span class="built_in">string</span>;    <span class="comment">// 上傳的路徑</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="attr">id</span>: <span class="built_in">number</span>;      <span class="comment">// 使用者 ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">name</span>: <span class="built_in">string</span>;    <span class="comment">// 使用者名稱</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">uploadFile</span>(<span class="params"></span>)&#123;&#125;   <span class="comment">// fn: 上傳檔案</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">removeFile</span>(<span class="params"></span>)&#123;&#125;   <span class="comment">// fn: 刪除檔案</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">readRecord</span>(<span class="params"></span>)&#123;&#125;   <span class="comment">// fn: 查詢上傳紀錄</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上傳紀錄</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UploadRecord</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="attr">id</span>: <span class="built_in">number</span>;      <span class="comment">// 上傳紀錄 ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">fileID</span>: <span class="built_in">number</span>;  <span class="comment">// 檔案 ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">userID</span>: <span class="built_in">number</span>;  <span class="comment">// 使用者 ID</span></span><br><span class="line">    <span class="keyword">public</span> <span class="attr">uploadTime</span>: <span class="title class_">Date</span>;<span class="comment">// 上傳時間</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>花個 3 分鐘簡單拆解而已，就能大致看出個輪廓了（當然要能開始開發還遠遠不夠）。類圖分析完後，接著就能用活動圖來分析使用者、前端、後端、資料庫之間的活動，以及活動內容，再來就能推出各自要開發的項目細節了。</p>
+<hr>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>如此麻煩地套用 <code>OOP</code>，究竟會產生哪些影響？</p>
+<ul>
+<li>分析：搭配 <code>UML</code> 能更系統化分析專案，在前期就盡可能釐清 spec</li>
+<li>開發：開發過程中能清楚正在處理的資料型別，不用瞎子摸象亂猜一通</li>
+<li>協作：他人能更迅速理解程式碼的邏輯，工程師間的溝通更順暢</li>
+<li>維護：debug 或修改屬性、擴充功能都更方便</li>
+</ul>
+<p>最重要的，是幫助自己在程式設計的領域中提升思維高度，以更全面的角度來看待整個專案，對於成長很有幫助。</p>
+<p>所以，一起來學吧！</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" >物件導向程式設計 - 維基百科<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.sanmin.com.tw/product/index/000747473" >UML 物件導向系統分析與設計 - Jim Arlow<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://medium.com/enjoy-life-enjoy-coding/typescript-%E5%BE%9E-ts-%E9%96%8B%E5%A7%8B%E5%AD%B8%E7%BF%92%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91-interface-%E7%94%A8%E6%B3%95-77fd0959769f" >TypeScript | 從 TS 開始學習物件導向 - Interface 用法 - 神Q超人<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：OOP 學習筆記 - 什麼是物件導向程式設計？跟前端開發有什麼關係？</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2021-11-23 19:57:57</li>
+        <li>
+            永久連結：https://gkfat.github.io/2021/11/23/oop-basic/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/OOP/">#OOP</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/TypeScript/">#TypeScript</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/SOLID/">#SOLID</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/12/linux-journalctl/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux 學習筆記 - Journalctl</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/09/05/golang-basic/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Golang 學習筆記 - 初步接觸 Go!</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%EF%BC%88Object-Oriented-Programming%EF%BC%89%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是物件導向程式設計（Object-Oriented Programming）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">物件導向四大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8A%BD%E8%B1%A1%EF%BC%88Abstraction%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">1. 抽象（Abstraction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B0%81%E8%A3%9D%EF%BC%88Encapsulation%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. 封裝（Encapsulation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B9%BC%E6%89%BF%EF%BC%88Inheritance%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3. 繼承（Inheritance）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%9A%E5%9E%8B%EF%BC%88Polymorphism%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">4. 多型（Polymorphism）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%A8%AD%E8%A8%88-SOLID-%E5%8E%9F%E5%89%87"><span class="nav-number">3.</span> <span class="nav-text">物件導向設計 SOLID 原則</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%96%AE%E4%B8%80%E8%81%B7%E8%B2%AC%E5%8E%9F%E5%89%87-Single-responsibility-principle-SRP"><span class="nav-number">3.1.</span> <span class="nav-text">1. 單一職責原則(Single responsibility principle, SRP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%96%8B%E6%94%BE%E5%B0%81%E9%96%89%E5%8E%9F%E5%89%87-Open-Close-principle-OCP"><span class="nav-number">3.2.</span> <span class="nav-text">2. 開放封閉原則(Open-Close principle, OCP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8F%9B%E5%8E%9F%E5%89%87-Liskov-substitution-principle-LSP"><span class="nav-number">3.3.</span> <span class="nav-text">3. 里氏替換原則(Liskov substitution principle, LSP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BB%8B%E9%9D%A2%E9%9A%94%E9%9B%A2%E5%8E%9F%E5%89%87-Interface-segregation-principle-ISP"><span class="nav-number">3.4.</span> <span class="nav-text">4. 介面隔離原則(Interface segregation principle, ISP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BE%9D%E8%B3%B4%E5%8F%8D%E8%BD%89%E5%8E%9F%E5%89%87-Dependency-inversion-principle-DIP"><span class="nav-number">3.5.</span> <span class="nav-text">5. 依賴反轉原則(Dependency inversion principle, DIP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOP-%E5%A6%82%E4%BD%95%E6%87%89%E7%94%A8%E5%9C%A8%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">OOP 如何應用在前端開發？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E9%85%8D%E7%A5%9E%E5%85%B5%E5%88%A9%E5%99%A8-TypeScript"><span class="nav-number">4.1.</span> <span class="nav-text">搭配神兵利器 TypeScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%9E%E3%80%8C%E7%89%A9%E4%BB%B6%E3%80%8D%E4%BD%9C%E7%82%BA%E5%87%BA%E7%99%BC%E9%BB%9E%E4%BE%86%E6%80%9D%E8%80%83"><span class="nav-number">4.2.</span> <span class="nav-text">從「物件」作為出發點來思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">5.</span> <span class="nav-text">結論</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

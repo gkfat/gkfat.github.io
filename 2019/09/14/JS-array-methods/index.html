@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            JavaScript 學習筆記 - 陣列操作方法 |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JavaScript 學習筆記 - 陣列操作方法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-09-14 15:08:04</span>
+        <span class="mobile">2019-09-14 15:08</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>在寫 JavaScript 時，很常會需要去操作陣列，為了加深自己對陣列操作方法的印象而整理了這一篇筆記。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="操作陣列的目的"><a href="#操作陣列的目的" class="headerlink" title="操作陣列的目的"></a>操作陣列的目的</h2><p>為了更好地分類內容，我們會把性質相近的元素放在同一個陣列，然而時常又需要對這個陣列做查找、提取、新增、刪除、或其他操作。JavaScript 內建有非常多操作陣列的方法（Methods），不過常用的也只有幾種而已。</p>
+<p>陣列具有兩個重要的屬性： <code>length</code> 與 <code>index</code>，透過這兩個屬性，我們得以直接接觸到目標內容，就不需要迭代整個陣列。</p>
+<h2 id="操作陣列的方法"><a href="#操作陣列的方法" class="headerlink" title="操作陣列的方法"></a>操作陣列的方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>forEach()</td>
+<td>對每一個元素執行傳入的 <code>callback</code></td>
+</tr>
+<tr>
+<td>map()</td>
+<td>return 一個新陣列，每一個元素為執行傳入的 <code>callback</code> 後的結果</td>
+</tr>
+<tr>
+<td>filter()</td>
+<td>return 一個在 <code>callback</code> 中返回 true 的元素的新陣列</td>
+</tr>
+<tr>
+<td>every()</td>
+<td>如果陣列每一項元素都在 <code>callback</code> 中返回 true，則返回 true</td>
+</tr>
+<tr>
+<td>some()</td>
+<td>如果陣列至少有一項元素在 <code>callback</code> 中返回 true，則返回 true</td>
+</tr>
+<tr>
+<td>reduce()</td>
+<td>透過 <code>callback</code> 對陣列中每個元素做運算，並 return 一個單一的值</td>
+</tr>
+<tr>
+<td>concat()</td>
+<td>合併兩個陣列，並 return 新陣列</td>
+</tr>
+<tr>
+<td>copyWithin()</td>
+<td>複製陣列中某些元素，並取代陣列中指定 <code>index</code> 的元素</td>
+</tr>
+<tr>
+<td>fill()</td>
+<td>將陣列中的元素，替換為傳入的值</td>
+</tr>
+<tr>
+<td>keys()</td>
+<td>return 一個新陣列，每一個元素是原陣列中每個元素的 <code>index</code> 值</td>
+</tr>
+<tr>
+<td>find()</td>
+<td>將陣列中每一個元素帶入 <code>callback</code> 判斷，並回傳第一個符合條件的元素</td>
+</tr>
+<tr>
+<td>findIndex()</td>
+<td>將陣列中每一個元素帶入 <code>callback</code> 判斷，並回傳第一個符合條件的元素的 <code>index</code></td>
+</tr>
+<tr>
+<td>indexOf()</td>
+<td>在陣列中由前往後查找目標元素的 <code>index</code></td>
+</tr>
+<tr>
+<td>lastIndexOf()</td>
+<td>在陣列中由後往前查找目標元素的 <code>index</code></td>
+</tr>
+<tr>
+<td>join()</td>
+<td>將陣列內容合併成一個字串</td>
+</tr>
+<tr>
+<td>toString()</td>
+<td>return 一個字串，內容是以逗號分隔的陣列元素</td>
+</tr>
+<tr>
+<td>shift()</td>
+<td>移除並返回陣列的第一個元素</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>移除並返回陣列的最後一個元素</td>
+</tr>
+<tr>
+<td>unshift()</td>
+<td>在陣列的開頭新增傳入的元素</td>
+</tr>
+<tr>
+<td>push()</td>
+<td>在陣列的最後新增傳入的元素</td>
+</tr>
+<tr>
+<td>reverse()</td>
+<td>反轉陣列元素的排列順序</td>
+</tr>
+<tr>
+<td>sort()</td>
+<td>排序陣列的元素</td>
+</tr>
+<tr>
+<td>slice()</td>
+<td>return 一個新陣列，內容為指定 <code>index</code> 及長度的元素</td>
+</tr>
+<tr>
+<td>splice()</td>
+<td>可新增或移除指定 <code>index</code> 的元素</td>
+</tr>
+<tr>
+<td>isArray()</td>
+<td>判斷一個物件是否為陣列，return true &#x2F; false</td>
+</tr>
+<tr>
+<td>from()</td>
+<td>將物件依照 <code>callback</code> 轉換為陣列</td>
+</tr>
+<tr>
+<td>includes()</td>
+<td>判斷陣列中是否含有某個元素，return true &#x2F; false</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h2><p>僅管操作陣列的方法有這麼多種，其實平常也不會全部都用到。以下整理了幾個我本身較常使用的方法。</p>
+<h3 id="forEach-map"><a href="#forEach-map" class="headerlink" title="forEach() map()"></a><code>forEach()</code> <code>map()</code></h3><p>當想要對一個陣列中每個元素做操作，這兩種方法就很好用。 若只是想對每個元素進行操作，就用<code>forEach()</code>（有點類似使用 <code>for</code> 迴圈，不過寫法更簡潔）；若操作完後要直接回傳一個陣列，就用 <code>map()</code>。</p>
+<h3 id="filter-every-some"><a href="#filter-every-some" class="headerlink" title="filter() every() some()"></a><code>filter()</code> <code>every()</code> <code>some()</code></h3><p>在實現篩選功能的時候，這幾個方法就很適合。</p>
+<p>若需要較複雜的篩選條件，就用<code>filter()</code> 遍歷整個陣列，並直接返回一個新陣列；而 <code>every()</code> 與 <code>some()</code> 可以拿來做比較簡單的篩選，只需判斷 <code>true</code> &#x2F; <code>false</code>。</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a><code>sort()</code></h3><p>需要對陣列做排序的時候使用。若要做大小排序，只需代入下列匿名函式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array.<span class="title function_">sort</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>當然還可以做更複雜的排序。</p>
+<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a><code>reduce()</code></h3><p>有點類似 <code>forEach()</code> 與 <code>map()</code> 的用法，但更適合在要對整個陣列運算出一個單一結果時使用。</p>
+<h3 id="find-findIndex"><a href="#find-findIndex" class="headerlink" title="find() findIndex()"></a><code>find()</code> <code>findIndex()</code></h3><p>能夠用抽象的描述找到符合條件元素的 <code>index</code>。通常接著會搭配使用其他的方法，像是取出該元素或複製、刪除等等。</p>
+<h3 id="indexOf-lastIndexOf"><a href="#indexOf-lastIndexOf" class="headerlink" title="indexOf() lastIndexOf()"></a><code>indexOf()</code> <code>lastIndexOf()</code></h3><p>如果已經知道目標元素的長相，這兩個方法能夠直接查詢 <code>index</code>，方便你做接下來的操作。</p>
+<h3 id="splice"><a href="#splice" class="headerlink" title="splice()"></a><code>splice()</code></h3><p>能夠很方便地在陣列中指定位置刪除／新增元素，有三個參數可以代入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.<span class="title function_">splice</span>(index, howmany, items)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index</td>
+<td>必需。為正／負整數，指定在陣列中開始操作的位置。</td>
+</tr>
+<tr>
+<td>howmany</td>
+<td>必需。指定要刪除的數量，若不刪除元素則設置為 0。</td>
+</tr>
+<tr>
+<td>items</td>
+<td>可選。向陣列新增的元素。</td>
+</tr>
+</tbody></table>
+<h3 id="push"><a href="#push" class="headerlink" title="push()"></a><code>push()</code></h3><p>若只是需要將新元素插入到陣列的最後，直接使用 <code>push()</code>。</p>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a><code>slice()</code></h3><p>從陣列中複製一段內容，並回傳一個新陣列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.<span class="title function_">slice</span>(start, end)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start</td>
+<td>為正／負整數，指定在陣列中開始操作的位置。</td>
+</tr>
+<tr>
+<td>end</td>
+<td>可選。提取片段的結尾位置，若有設定則提取到該位置的前一個元素，若不設定就會提取到最後。</td>
+</tr>
+</tbody></table>
+<h3 id="reverse-join"><a href="#reverse-join" class="headerlink" title="reverse() join()"></a><code>reverse()</code> <code>join()</code></h3><p>這兩個方法有時候會搭配使用，當你想要把一個字串內的每個字元反轉過來的時候，先使用字串的操作方法 <code>split()</code> 將其變成陣列，再做 <code>reverse()</code> 反轉每個元素，最後用 <code>join()</code> 再讓他變成一個字串。</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.tutorialrepublic.com/javascript-reference/javascript-array-object.php" >Tutorial Republic - JavaScript Array Methods<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Obsolete_Pages/Obsolete_Pages/Obsolete_Pages/%E9%99%A3%E5%88%97%E7%9A%84%E9%81%8B%E7%94%A8" >MDN - 陣列的運用<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201908/js-array.html" >OXXO Studio - JavaScript Array 陣列操作方法大全 ( 含 ES6 )<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：JavaScript 學習筆記 - 陣列操作方法</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2019-09-14 15:08:04</li>
+        <li>
+            永久連結：https://gkfat.github.io/2019/09/14/JS-array-methods/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/09/15/JS-hoisting/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaScript 學習筆記 - hoisting</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/09/12/web-cookie-session/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E9%99%A3%E5%88%97%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">操作陣列的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E9%99%A3%E5%88%97%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">操作陣列的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">常用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forEach-map"><span class="nav-number">3.1.</span> <span class="nav-text">forEach() map()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-every-some"><span class="nav-number">3.2.</span> <span class="nav-text">filter() every() some()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">3.3.</span> <span class="nav-text">sort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-number">3.4.</span> <span class="nav-text">reduce()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-findIndex"><span class="nav-number">3.5.</span> <span class="nav-text">find() findIndex()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf-lastIndexOf"><span class="nav-number">3.6.</span> <span class="nav-text">indexOf() lastIndexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice"><span class="nav-number">3.7.</span> <span class="nav-text">splice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#push"><span class="nav-number">3.8.</span> <span class="nav-text">push()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice"><span class="nav-number">3.9.</span> <span class="nav-text">slice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse-join"><span class="nav-number">3.10.</span> <span class="nav-text">reverse() join()</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

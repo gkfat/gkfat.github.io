@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            Git 學習筆記 - 如何使用 Git 做版本控制 |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Git 學習筆記 - 如何使用 Git 做版本控制</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-10-24 22:16:32</span>
+        <span class="mobile">2019-10-24 22:16</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/git/">git</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>身為一位工程師，版本控制的重要性就應該刻在你的靈魂深處。不做版控，表示你必需冒著風險修復更動程式碼之後出現的 bug，也代表你的網站被攻擊之後，沒辦法恢復到原來的狀態。</p>
+<span id="more"></span>
+
+<p>所謂版本控制不只是備份專案，更主要的是將專案切成小塊，透過版本紀錄，可以清楚知道專案的進度、每一個版本改動了哪些東西、程式碼之間的差異。</p>
+<p>總而言之，版控是一定要的。</p>
+<hr>
+<h2 id="使用-Git-的流程"><a href="#使用-Git-的流程" class="headerlink" title="使用 Git 的流程"></a>使用 Git 的流程</h2><p>因為 <code>git</code> 相當博大精深，指令超多，我們在一般專案操作及協作上，有個基本的認知的就可以了。平常用到的都是基本功能，哪天遇到奇怪的狀況，再查資料想辦法解決就好了。</p>
+<p>那麼，開始吧！</p>
+<h3 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h3><blockquote>
+<p>先安裝才能使用啊：<a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/book/zh-tw/v2/%E9%96%8B%E5%A7%8B-Git-%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8" >Git 安裝教學<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 顯示目前的 git 配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 設定使用者</span></span><br><span class="line">$ git config user.name <span class="string">&quot;GK&quot;</span></span><br><span class="line">$ git config user.email <span class="string">&quot;gk@fat.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="產生-git-目錄"><a href="#產生-git-目錄" class="headerlink" title="產生 git 目錄"></a>產生 git 目錄</h3><p>開始寫扣之前，先產生一個 <code>git</code> 目錄。有人習慣用 sourcetree，也可以，但我比較喜歡用 command line 敲指令，因為這樣比較帥（喂）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 產生專案資料夾</span></span><br><span class="line">$ <span class="built_in">mkdir</span> myProject</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移動到專案目錄</span></span><br><span class="line">$ <span class="built_in">cd</span> myProject</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 git</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 看到這條訊息，表示成功 init 了</span></span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> 你的專案目錄/myProject/.git/</span><br></pre></td></tr></table></figure>
+
+<h3 id="Commit-流程"><a href="#Commit-流程" class="headerlink" title="Commit 流程"></a>Commit 流程</h3><p>現在有了 <code>git</code>，可以開始做版本控管了。那麼先來看看目前是什麼情況吧。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">fatal: your current branch <span class="string">&#x27;master&#x27;</span> does not have any commits yet</span><br></pre></td></tr></table></figure>
+
+<p>因為你還沒做過任何 commit，所以 <code>master</code> 主支目前是空的狀態。讓我們來試著 commit 一下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將檔案添加到暫存區</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將暫存區提交到倉庫</span></span><br><span class="line">$ git commit -m <span class="string">&quot;First Commit&quot;</span></span><br><span class="line">On branch master</span><br><span class="line">Initial commit</span><br><span class="line">nothing to commit</span><br></pre></td></tr></table></figure>
+
+<p>結果因為沒有任何檔案，所以不讓你 commit。</p>
+<p>好啦，開始寫扣囉。</p>
+<p>專案進行到一個階段後，到達設定的里程碑了，打算來更新版本。假設實作好了「新增／刪除產品」的功能，此時先用上個步驟的添加文件，把進度加到暫存區，然後將暫存區提交到倉庫，完成一個版本更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將檔案添加到暫存區</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將暫存區提交到倉庫</span></span><br><span class="line">$ git commit -m <span class="string">&quot;Update Add Product Features&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 假如你發現 commit message 打錯了想要更改，可以這樣改寫最後一次的 commit</span></span><br><span class="line">$ git commit --amend -m <span class="string">&quot;Update Add &amp; Delete Product Features&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果後悔了，想要撤銷暫存區的檔案，恢復到工作區</span></span><br><span class="line">$ git checkout .</span><br></pre></td></tr></table></figure>
+
+<p><code>-m</code> 後面那一串代表的是這次版本更新攜帶的訊息，方便之後 <code>git log</code> 時查看，這邊推薦使用英文，方便查詢。</p>
+<p>或許你會想知道能不能修改更早之前的 commit，答案是可以，只是你需要先移動到該次 commit，再用上面那招更改。</p>
+<h3 id="增加／刪除文件"><a href="#增加／刪除文件" class="headerlink" title="增加／刪除文件"></a>增加／刪除文件</h3><p>不一定每次都要把全部更動的文件加到暫存，可以一次只加一個文件／資料夾。這樣，還沒做好的檔案就可以繼續保持狀態，而更新過的檔案就讓他進去 commit。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加目前目錄的所有文件到暫存區</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定文件到暫存區</span></span><br><span class="line">$ git add [fileName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除指定文件，並把刪除的動作加入暫存區</span></span><br><span class="line">$ git <span class="built_in">rm</span> [fileName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追蹤文件，但不刪除文件</span></span><br><span class="line">$ git <span class="built_in">rm</span> --cached [fileName]</span><br></pre></td></tr></table></figure>
+
+<h3 id="分支的操作"><a href="#分支的操作" class="headerlink" title="分支的操作"></a>分支的操作</h3><p>分支 <code>branch</code> 非常方便，你可以想像把一整份項目的檔案全部拷貝出來，修改完其中一個部分，並確定能正常執行後，再合併回去項目本身，這就是分支的概念。</p>
+<p>特別是當多人協作的時候，每個人都可以從特定的版本去拷貝一份出來，進行自己那部份的修改，再合併回去。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 從當前分支新增一個分支，但停留在當前分支</span></span><br><span class="line">$ git branch [newBranch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一個分支並切換過去</span></span><br><span class="line">$ git checkout -b [newBranch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切換到指定分支，同時更新工作區</span></span><br><span class="line">$ git checkout [branchName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合併指定分支到目前分支</span></span><br><span class="line">$ git merge [branchName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除分支</span></span><br><span class="line">$ git branch -d [branchName]</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 顯示目前分支的版本歷史</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查詢 commit 歷史</span></span><br><span class="line">$ git <span class="built_in">log</span> -S [keyword]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="遠程協同作業"><a href="#遠程協同作業" class="headerlink" title="遠程協同作業"></a>遠程協同作業</h2><p>上面是在本地端操作 <code>git</code> 的部分，那今天當多人要協作時，又是什麼情況呢？假設今天選用的遠端倉庫是 GitHub。</p>
+<h3 id="與-GitHub-連動"><a href="#與-GitHub-連動" class="headerlink" title="與 GitHub 連動"></a>與 GitHub 連動</h3><blockquote>
+<p>直接看保哥的教學比較快：<a class="link"   target="_blank" rel="noopener" href="https://github.com/doggy8088/Learn-Git-in-30-days/blob/master/zh-tw/25.md" >第 25 天：使用 GitHub 遠端儲存庫 - 觀念篇<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增一個遠端倉庫</span></span><br><span class="line">$ git remote add [shortName] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下載一個遠端倉庫的完整 git 歷史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下載遠端倉庫的所有變動</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下載遠端倉庫的所有內容，並將遠端的 origin/master 合併到本地 master</span></span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將本地的所有變動與歷史推送到遠端倉庫</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+
+<p>以上就是我常用的 <code>git</code> 指令。如果想對 <code>git</code> 有更深入的理解（其實我還有很多不懂的地方），就繼續找資源來鑽研吧！</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/book/zh-tw/v2/%E9%96%8B%E5%A7%8B-Git-%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8" >Git 安裝教學<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/doggy8088/Learn-Git-in-30-days" >30 天精通 Git 版本控管<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：Git 學習筆記 - 如何使用 Git 做版本控制</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2019-10-24 22:16:32</li>
+        <li>
+            永久連結：https://gkfat.github.io/2019/10/24/git/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/git/">#git</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/12/22/Node-intro/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Node.js 學習筆記 - 初次接觸 Node.js</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/10/24/nginx/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Nginx 學習筆記 - 使用 Nginx</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Git-%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">使用 Git 的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-git"><span class="nav-number">1.1.</span> <span class="nav-text">配置 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A2%E7%94%9F-git-%E7%9B%AE%E9%8C%84"><span class="nav-number">1.2.</span> <span class="nav-text">產生 git 目錄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commit-%E6%B5%81%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Commit 流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%EF%BC%8F%E5%88%AA%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">增加／刪除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">分支的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C"><span class="nav-number">1.6.</span> <span class="nav-text">其他操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%A0%E7%A8%8B%E5%8D%94%E5%90%8C%E4%BD%9C%E6%A5%AD"><span class="nav-number">2.</span> <span class="nav-text">遠程協同作業</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%88%87-GitHub-%E9%80%A3%E5%8B%95"><span class="nav-number">2.1.</span> <span class="nav-text">與 GitHub 連動</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

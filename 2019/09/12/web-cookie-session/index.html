@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較 |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-09-12 17:36:01</span>
+        <span class="mobile">2019-09-12 17:36</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/web/">web</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/localStorage/">localStorage</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/sessionStorage/">sessionStorage</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cookie/">cookie</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/session/">session</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>597 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>這幾個東西有什麼不同？這是面試很常出現的基礎題，也是前端新手（*例如我）很容易霧煞煞的部分。為了加深印象，我決定來整理一篇筆記。</p>
+<span id="more"></span>
+<p>在找資料的過程中，發現一個叫做 <code>session</code> 的東西，與 <code>cookie</code> 放在一起討論。這解釋了我其中一場面試的疑惑，當我在討論<code>localStorage</code> 與 <code>sessionStorage</code> 時，面試官卻說「<code>session</code> 應該是存在伺服器端的才對」，並且提到了 <code>cookie</code>。</p>
+<p>原因在這裡，我們講的是不同東西啊！面試官嘴裡說的是 <code>sessionStorage</code>，心裡想的卻是 <code>session</code>。</p>
+<p>真抱歉，我又不會通靈。</p>
+<hr>
+<h2 id="localStorage-與-sessionStorage"><a href="#localStorage-與-sessionStorage" class="headerlink" title="localStorage 與 sessionStorage"></a><code>localStorage</code> 與 <code>sessionStorage</code></h2><h3 id="相同特徵"><a href="#相同特徵" class="headerlink" title="相同特徵"></a>相同特徵</h3><ul>
+<li>儲存大小限制皆為 5MB 左右</li>
+<li>都有同源策略（CORS）限制</li>
+<li>僅在客戶端瀏覽器中存在</li>
+</ul>
+<h3 id="相異特徵"><a href="#相異特徵" class="headerlink" title="相異特徵"></a>相異特徵</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>localStorage</th>
+<th>sessionStorage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>生命週期</td>
+<td>永久儲存在瀏覽器中，除非人為刪除</td>
+<td>瀏覽器或標籤頁關閉時自動刪除</td>
+</tr>
+<tr>
+<td>作用域</td>
+<td>在同一個瀏覽器内，同源文件間共享，可互相讀取、覆蓋</td>
+<td>因生命週期關係，僅在同個瀏覽器、同個標籤頁內的同源文件間才可共享</td>
+</tr>
+</tbody></table>
+<h3 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sessionStorage用法相同</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>();     <span class="comment">// 儲存一個物件</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>();     <span class="comment">// 獲取物件內容</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">key</span>();         <span class="comment">// 獲取第i個物件</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">removeItem</span>();  <span class="comment">// 刪除一個物件</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">clear</span>();       <span class="comment">// 全部删除</span></span><br></pre></td></tr></table></figure>
+<p>透過上述的方法，就能夠將使用者的一些資料（例如搜尋字串等）儲存在該使用者的瀏覽器中，當下次再訪問這個網站時，就能夠使用這些資料來提升使用者體驗。</p>
+<hr>
+<h2 id="cookie-與-session"><a href="#cookie-與-session" class="headerlink" title="cookie 與 session"></a><code>cookie</code> 與 <code>session</code></h2><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a><code>cookie</code></h3><ul>
+<li>大小限制只有 4KB 左右</li>
+<li>通常會帶有使用者的 <code>sessionID</code> 供伺服器辨識</li>
+<li>由伺服器產生後保存在客戶端，可以設定多久失效</li>
+<li>每次都攜帶在 HTTP header 中</li>
+</ul>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a><code>session</code></h3><ul>
+<li>保存在伺服器端</li>
+<li>存有使用者的敏感資料</li>
+</ul>
+<h3 id="cookie-與-session-的溝通"><a href="#cookie-與-session-的溝通" class="headerlink" title="cookie 與 session 的溝通"></a><code>cookie</code> 與 <code>session</code> 的溝通</h3><p>當使用者訪問網站、通過身份認證後，伺服器端會送出一個 <code>cookie</code> 到客戶端，並建立一個 <code>sessionID</code> 存在 <code>cookie</code> 中。之後使用者只要通過該網站的身份認證，就能夠透過存在 <code>cookie</code> 中的 <code>sessionID</code> 查找到存在伺服器的 <code>session</code> 資料。</p>
+<hr>
+<p>參考資料</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://juejin.im/entry/5ac4d661f265da23a049c92a" >细说localStorage, sessionStorage, Cookie, Session<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.hellojcc.tw/2016/01/12/introduce-session-and-cookie/" >介紹 Session 及 Cookie 兩者的差別說明<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2019-09-12 17:36:01</li>
+        <li>
+            永久連結：https://gkfat.github.io/2019/09/12/web-cookie-session/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/web/">#web</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/localStorage/">#localStorage</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/sessionStorage/">#sessionStorage</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/cookie/">#cookie</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/session/">#session</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/09/14/JS-array-methods/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaScript 學習筆記 - 陣列操作方法</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/09/12/JS-ES5-ES6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaScript 學習筆記 - ES5 vs ES6</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#localStorage-%E8%88%87-sessionStorage"><span class="nav-number">1.</span> <span class="nav-text">localStorage 與 sessionStorage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%89%B9%E5%BE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">相同特徵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E7%95%B0%E7%89%B9%E5%BE%B5"><span class="nav-number">1.2.</span> <span class="nav-text">相異特徵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">操作方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie-%E8%88%87-session"><span class="nav-number">2.</span> <span class="nav-text">cookie 與 session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-number">2.1.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">2.2.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie-%E8%88%87-session-%E7%9A%84%E6%BA%9D%E9%80%9A"><span class="nav-number">2.3.</span> <span class="nav-text">cookie 與 session 的溝通</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

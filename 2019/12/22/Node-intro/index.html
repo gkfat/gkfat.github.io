@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            Node.js 學習筆記 - 初次接觸 Node.js |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Node.js 學習筆記 - 初次接觸 Node.js</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-12-22 14:28:48</span>
+        <span class="mobile">2019-12-22 14:28</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Node-js/">Node.js</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>由於公司有使用 Node.js 撰寫的專案，之後有維護需求，因此對 Node.js 一竅不通的我，只好趕快惡補。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h2><h3 id="1-1-為什麼要學-Node-js"><a href="#1-1-為什麼要學-Node-js" class="headerlink" title="1.1 為什麼要學 Node.js"></a>1.1 為什麼要學 Node.js</h3><p>Node.js 有許多優勢，但對我而言最直接的原因就是，因為我在前端使用的是 JavaScript，Node.js 是使用 JavaScript 的後端語言，因此對於理解上，就少了一層障礙。</p>
+<ul>
+<li>使用 JavaScript 的後端語言</li>
+<li>能夠自己寫 web server</li>
+<li>非同步 IO，事件驅動的特性，降低等待時間與耗能</li>
+<li>許多第三方套件（如 express、socket…等等）</li>
+<li>入門簡單（<del>我不相信</del>）</li>
+</ul>
+<h3 id="1-2-基本認識-Node-js"><a href="#1-2-基本認識-Node-js" class="headerlink" title="1.2 基本認識 Node.js"></a>1.2 基本認識 Node.js</h3><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Node.js" >Node.js - 維基百科<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008961775" >Node.js之深入理解特性<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>如上所述，Node.js 的特性有以下幾個：</p>
+<ul>
+<li>事件驅動才調用 I&#x2F;O 資源，減少耗能</li>
+<li>使用 JavaScript 語言編寫</li>
+</ul>
+<h3 id="1-3-如何學習-Node-js"><a href="#1-3-如何學習-Node-js" class="headerlink" title="1.3 如何學習 Node.js"></a>1.3 如何學習 Node.js</h3><p>那麼要學習 Node.js，具體來說應該要理解哪些事呢？我列出幾個學習重點，也方便日後檢視是否真的學會了這些東西：</p>
+<ul>
+<li>JavaScript 基礎</li>
+<li>Unix &#x2F; Linux 指令</li>
+<li>理解伺服器端腳本</li>
+<li>模組和套件管理</li>
+<li>異步 I&#x2F;O 與 Async 流程控制庫（Input &#x2F; Output，網路、文件、資料庫、使用者輸入等等的進出）</li>
+<li>事件處理機制</li>
+<li>Node.js 與 AJAX</li>
+<li>跨平台與跨瀏覽器的相容</li>
+<li>TCP&#x2F;UDP 網路程式設計</li>
+<li>HTTP&#x2F;HTTPS 應用程式設計</li>
+<li>Node.js 與資料庫互動</li>
+</ul>
+<h3 id="1-4-Node-js-可以做些什麼？"><a href="#1-4-Node-js-可以做些什麼？" class="headerlink" title="1.4 Node.js 可以做些什麼？"></a>1.4 Node.js 可以做些什麼？</h3><ul>
+<li>撰寫 REST APIs</li>
+<li>即時服務（線上聊天室、連線遊戲）</li>
+<li>串接資料庫、blog、社群平台</li>
+</ul>
+<p>我認為伺服器最主要功能就是做資源的處理，而前端是接口與呈現。所以在初步學習了 Node.js 之後，應該就會朝撰寫 API、串 WebSocket、串資料庫等方向去進一步探索吧。畢竟學程式就是要做出想做的作品嘛。</p>
+<hr>
+<h2 id="2-Node-js-基本概念"><a href="#2-Node-js-基本概念" class="headerlink" title="2. Node.js 基本概念"></a>2. Node.js 基本概念</h2><h3 id="2-1-線程處理與事件循環"><a href="#2-1-線程處理與事件循環" class="headerlink" title="2.1 線程處理與事件循環"></a>2.1 線程處理與事件循環</h3><h4 id="2-1-1-線程處理"><a href="#2-1-1-線程處理" class="headerlink" title="2.1.1 線程處理"></a>2.1.1 線程處理</h4><ol>
+<li>收到 request</li>
+<li>thread 應對</li>
+<li>request 處理完成，thread 釋放</li>
+</ol>
+<p>所謂線程處理，當收到請求時就依照以上步驟處理，因此當同時湧入大量請求時，伺服器負荷就會提高。例如 Apache 6,7,8,9 等版本。</p>
+<h4 id="2-1-2-事件循環"><a href="#2-1-2-事件循環" class="headerlink" title="2.1.2 事件循環"></a>2.1.2 事件循環</h4><p>Node.js 的事件循環特性就能比較好地 handle 這問題，他的運作方式如下：</p>
+<ol>
+<li>開一個事件等待循環（event loop）</li>
+<li>收到 request</li>
+<li>將 request 塞入處理隊列中，然後繼續監聽其他 request</li>
+<li>request 處理完成後，調用 I&#x2F;O，結束 request</li>
+</ol>
+<p>也就是說，Node.js 以一個監聽器來處理 request 的「請求」與「完成」，並不會從頭到尾監聽，而只在這兩種事件出現時才調用 I&#x2F;O 資源。</p>
+<h3 id="2-2-阻塞處理／非阻塞處理"><a href="#2-2-阻塞處理／非阻塞處理" class="headerlink" title="2.2 阻塞處理／非阻塞處理"></a>2.2 阻塞處理／非阻塞處理</h3><h4 id="2-2-1-阻塞處理"><a href="#2-2-1-阻塞處理" class="headerlink" title="2.2.1 阻塞處理"></a>2.2.1 阻塞處理</h4><p>會發生阻塞處理的語言有：Java、Ruby、PHP、Asp.Net 等，因為他們會照以下方式處理程序：</p>
+<ol>
+<li>先執行的函式尚未處理完，不會執行下一個函式</li>
+<li>所有的函式都要等待前一個函式處理完</li>
+<li>塞車</li>
+</ol>
+<h4 id="2-2-2-非阻塞處理"><a href="#2-2-2-非阻塞處理" class="headerlink" title="2.2.2 非阻塞處理"></a>2.2.2 非阻塞處理</h4><p>而 Node.js 就能有效解決這個問題，但相對地也會有弱勢。</p>
+<ol>
+<li>呼叫函式時，需傳入一個 callback，處理完畢後調用 callback</li>
+<li>一旦函式開始處理，不用等待結果，就繼續運行下一個函式</li>
+<li>整份檔案順暢跑完（但各函式不會同時處理完畢）！</li>
+</ol>
+<h3 id="2-3-Node-modules"><a href="#2-3-Node-modules" class="headerlink" title="2.3 Node_modules"></a>2.3 Node_modules</h3><p>Node.js 本身的 node_modules 就提供了相當多的套件可以使用，隨便舉幾個例子：</p>
+<ul>
+<li><code>http</code>：Web http request 處理</li>
+<li><code>fs</code>：文件處理</li>
+<li><code>path</code>：路徑處理</li>
+<li><code>url</code>：網址處理</li>
+<li><code>eventEmitter</code>：request 事件監聽處理</li>
+<li><code>uuid</code>：產生不重複 ID 的小工具</li>
+</ul>
+<p>而在部署時，並不需要將這些套件一起打包，只要在 config.json 的 dependencies 註明清楚，就可以透過 <code>npm install</code> 來安裝所有需要的套件包了。</p>
+<hr>
+<h2 id="3-開始-Node-s！"><a href="#3-開始-Node-s！" class="headerlink" title="3. 開始 Node.s！"></a>3. 開始 Node.s！</h2><h3 id="3-1-“Hello-World”"><a href="#3-1-“Hello-World”" class="headerlink" title="3.1 “Hello World”"></a>3.1 “Hello World”</h3><p>是的，學習一個新語言，當然都是從最基本的跟世界打個招呼來開始。首先知道如何運行它，然後才能一步步深入。</p>
+<ul>
+<li>檢查 Node.js 版本</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ node -v <span class="comment">// v10.16.0 // 看得到版本代表有成功安裝 Node.js</span></span><br><span class="line">$ npm -v <span class="comment">// 6.9.0 // 同時檢查 Node Package Manager 版本</span></span><br><span class="line">$ node <span class="comment">// 並跳轉至大於符號代表成功進入 Node 環境</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在 Node.js 環境下，呼叫 <code>console</code> 輸出 Hello World</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World&quot;</span>); <span class="comment">// Node 環境下可以撰寫 JavaScript</span></span><br><span class="line"><span class="title class_">Hello</span> <span class="title class_">World</span> <span class="comment">// 這是 Node 吐出來的，成功使用 Node 了！</span></span><br><span class="line"><span class="literal">undefined</span> <span class="comment">// 看到這個不要緊張，這是返回 console.log 這函數的值</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其他操作</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ .<span class="property">help</span> <span class="comment">// 查看 Node 幫助</span></span><br><span class="line">$ .<span class="property">exit</span> <span class="comment">// 離開 Node</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-進一步的-Hello-World"><a href="#3-2-進一步的-Hello-World" class="headerlink" title="3.2 進一步的 Hello World"></a>3.2 進一步的 Hello World</h3><p>當然，我們不希望每次都在 Node.js 裡面打一堆程式碼，最好是能呼叫執行檔案。那麼具體的操作方法是怎麼樣呢？</p>
+<ol>
+<li>建立一個 helloworld.js 檔</li>
+<li>檔案內容為： <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;Hello Node.js!&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str);</span><br></pre></td></tr></table></figure></li>
+<li>然後，在控制台使用 Node 運行這個檔案 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node helloworld.<span class="property">js</span> <span class="comment">// 或 node helloworld</span></span><br><span class="line"><span class="title class_">Hello</span> <span class="title class_">Node</span>.<span class="property">js</span>!</span><br></pre></td></tr></table></figure></li>
+<li>成功使用 Node.js 呼叫檔案了！</li>
+</ol>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><hr>
+<h2 id="4-結語"><a href="#4-結語" class="headerlink" title="4. 結語"></a>4. 結語</h2><p>關於 Node.js 的入門學習，就到這邊告一段落了。接下來我會繼續學習如何使用 express 框架來開發 Node.js app，接著就要逐漸嘗試實作出即時聊天室或小遊戲啦！</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Node.js" >Node.js - 維基百科<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=fBNz5xF-Kx4" >Node.js Crash Course - Traversy Media<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008961775" >Node.js之深入理解特性<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：Node.js 學習筆記 - 初次接觸 Node.js</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2019-12-22 14:28:48</li>
+        <li>
+            永久連結：https://gkfat.github.io/2019/12/22/Node-intro/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Node-js/">#Node.js</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/12/22/web-http/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Web 學習筆記 - HTTP</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/10/24/git/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git 學習筆記 - 如何使用 Git 做版本控制</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Overview"><span class="nav-number">1.</span> <span class="nav-text">1. Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E5%AD%B8-Node-js"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 為什麼要學 Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%9F%BA%E6%9C%AC%E8%AA%8D%E8%AD%98-Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 基本認識 Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%A6%82%E4%BD%95%E5%AD%B8%E7%BF%92-Node-js"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 如何學習 Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Node-js-%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BA%9B%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Node.js 可以做些什麼？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Node-js-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">2. Node.js 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%B7%9A%E7%A8%8B%E8%99%95%E7%90%86%E8%88%87%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%92%B0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 線程處理與事件循環</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-%E7%B7%9A%E7%A8%8B%E8%99%95%E7%90%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 線程處理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%92%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 事件循環</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%98%BB%E5%A1%9E%E8%99%95%E7%90%86%EF%BC%8F%E9%9D%9E%E9%98%BB%E5%A1%9E%E8%99%95%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 阻塞處理／非阻塞處理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E9%98%BB%E5%A1%9E%E8%99%95%E7%90%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 阻塞處理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-%E9%9D%9E%E9%98%BB%E5%A1%9E%E8%99%95%E7%90%86"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 非阻塞處理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Node-modules"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Node_modules</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%96%8B%E5%A7%8B-Node-s%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">3. 開始 Node.s！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E2%80%9CHello-World%E2%80%9D"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 “Hello World”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%80%B2%E4%B8%80%E6%AD%A5%E7%9A%84-Hello-World"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 進一步的 Hello World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text">4. 結語</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

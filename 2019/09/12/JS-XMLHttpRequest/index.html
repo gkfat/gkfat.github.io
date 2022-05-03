@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            JavaScript 學習筆記 - XMLHttpRequest |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JavaScript 學習筆記 - XMLHttpRequest</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-09-12 15:32:11</span>
+        <span class="mobile">2019-09-12 15:32</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/XMLHttpRequest/">XMLHttpRequest</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>944 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：</p>
+<ul>
+<li>用 jQuery 實現</li>
+<li>用 fetch 實現</li>
+<li>用 axios 實現<span id="more"></span>
+但我的想法是想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。</li>
+</ul>
+<p>很多免費資源都可以在 YouTube 上搜尋到，例如這一個頻道： <a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/user/TechGuyWeb" >Traversy Media<i class="fas fa-external-link-alt"></i></a>，他在這支影片裡就帶著你用原生 JS 操作 XMLHttpRequest：<a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=82hnvUYY6QA" >影片<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<h2 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a><em>XMLHttpRequest</em></h2><p>在了解如何操作之前，我想知道的是：<br><strong>「什麼是 XMLHttpRequest？它是為了什麼目的而存在的？」</strong></p>
+<p>找了一些資料來看之後，這是定義：</p>
+<blockquote>
+<p><strong>XMLHttp 是一組能被 web 瀏覽器內嵌的 script 語言呼叫的 API，通過 Http 在瀏覽器和 web 伺服器之間收發 XML 或其它資料。其最大的好處在於可以動態地更新網頁內容。</strong></p>
+</blockquote>
+<p>向伺服器發送一個 request，回傳資料後動態地更新網頁內容，對使用者而言，不用一直重複載入整個頁面，當然比較符合使用者體驗。</p>
+<p>同時，XMLHttpRequest 也是實現 AJAX 重要的一環，在使用 asyncronous（非同步）技術來要求資料後動態更新網頁內容，讓使用者不須等待資料全部載完，就能夠先瀏覽網頁的其他內容，UX 因此更上一層。</p>
+<p>但對現今的前端而言，AJAX 已經是必備技術，這也是我覺得必須盡快熟悉的原因。</p>
+<hr>
+<h2 id="XMLHttpRequest-的屬性"><a href="#XMLHttpRequest-的屬性" class="headerlink" title="XMLHttpRequest 的屬性"></a><em>XMLHttpRequest 的屬性</em></h2><ul>
+<li><p><code>XMLHttpRequest.onreadystatechange</code><br>在 <code>readyState</code> 屬性之狀態改變時被呼叫，可用於監聽 request 請求狀態的改變。</p>
+</li>
+<li><p><code>XMLHttpRequest.readyState</code><br>回傳一個 0~4 之間的整數值，每個值代表的意義如下：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>狀態</th>
+<th>意義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td><code>UNSENT</code></td>
+<td>客戶端已建立</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>OPENED</code></td>
+<td><code>open()</code> 方法已被呼叫</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>HEADERS_RECEIVED</code></td>
+<td><code>send()</code> 方法已被呼叫，且可取得 header 與狀態</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>LOADING</code></td>
+<td>回應資料下載中，此時 responseText 會擁有部分資料</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DONE</code></td>
+<td>完成下載</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本表格節自 <a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/readyState" >MDN：XMLHttpRequest.readyState<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+</li>
+<li><p><code>XMLHttpRequest.status</code><br>依據狀態不同，回傳介於 100~500 間的 HTTP status code，分別代表不同意義，例如代表成功回應的 <code>200 OK</code> 或廣為人知的錯誤 <code>404 Not Found</code>。</p>
+<blockquote>
+<p>更多狀態代碼請參照 <a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" >MDN：HTTP status code<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+</li>
+<li><p><code>XMLHttpRequest.responseText</code><br>回傳一個 DOMString，其內容為請求之回應的文字內容。如請求失敗或尚未發送，則為 null。若確定 responseText 為 JSON 格式，通常會接著做 <code>JSON.parse()</code> 並接著處理資料。</p>
+</li>
+</ul>
+<hr>
+<h2 id="如何發送-XMLHttpRequest"><a href="#如何發送-XMLHttpRequest" class="headerlink" title="如何發送 XMLHttpRequest"></a><em>如何發送 XMLHttpRequest</em></h2><p>假設要發送一個簡單的 XMLHttpRequest 向伺服器要求資料，需要做到以下幾點來確保能夠成功返回資料。</p>
+<ul>
+<li>建立一個 XMLHttpRequest</li>
+<li>定義請求的方法（<code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>…）</li>
+<li>定義監聽流程</li>
+<li>送出請求</li>
+</ul>
+<p>用範例表示的話就是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//創建 XMLHttpRequest</span></span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義送出要求的網址</span></span><br><span class="line">    <span class="keyword">let</span> url = <span class="string">&#x27;&lt;你想送出要求的網址&gt;&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義請求的方法</span></span><br><span class="line">    xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義監聽流程（當 status 改變時呼叫）</span></span><br><span class="line">    xhr.<span class="property">onreadyStatusChange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//顯示當前進度</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;readyState&#x27;</span>, xhr.<span class="property">readyState</span>, <span class="string">&#x27;status&#x27;</span>, xhr.<span class="property">status</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//確定請求成功時執行以下動作</span></span><br><span class="line">        <span class="keyword">if</span> ( xhr.<span class="property">status</span> === <span class="number">4</span> &amp;&amp; xhr.<span class="property">readyState</span> === <span class="number">200</span> ) &#123;</span><br><span class="line">            <span class="comment">//你想對回傳資料做些什麼？</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//送出請求</span></span><br><span class="line">    xhr.<span class="title function_">send</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是我目前了解到的發送 XMLHttpRequest 流程，以及每一步的意義。當然請求方法不只一種，XMLHttpRequest 也不會這麼單純，還有更多的細節需要處理。不過這部分就留待之後遇到再來研究如何解決吧。</p>
+<hr>
+<h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/XMLHttpRequest" >維基百科：XMLHttpRequest<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest" >MDN：XMLHttpRequest<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/readyState" >MDN：XMLHttpRequest.readyState<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" >MDN：HTTP status code<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：JavaScript 學習筆記 - XMLHttpRequest</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2019-09-12 15:32:11</li>
+        <li>
+            永久連結：https://gkfat.github.io/2019/09/12/JS-XMLHttpRequest/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/XMLHttpRequest/">#XMLHttpRequest</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/09/12/JS-ES5-ES6/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaScript 學習筆記 - ES5 vs ES6</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/09/06/html-html5/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">HTML 學習筆記 - HTML vs HTML5</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLHttpRequest"><span class="nav-number">1.</span> <span class="nav-text">XMLHttpRequest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLHttpRequest-%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">XMLHttpRequest 的屬性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%99%BC%E9%80%81-XMLHttpRequest"><span class="nav-number">3.</span> <span class="nav-text">如何發送 XMLHttpRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">3.0.1.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

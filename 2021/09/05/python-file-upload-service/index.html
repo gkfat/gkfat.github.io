@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            後端學習筆記 - 來寫一個串接 NAS 的檔案管理服務吧！ |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">後端學習筆記 - 來寫一個串接 NAS 的檔案管理服務吧！</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-09-05 08:31:08</span>
+        <span class="mobile">2021-09-05 08:31</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%BE%8C%E7%AB%AF%E9%96%8B%E7%99%BC/">後端開發</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/API/">API</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/NAS/">NAS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>公司裡有個部門每天都會產出一定份量的繪圖檔案，目前都是人工手動上傳到 NAS，但是對於資料夾與檔案的命名卻沒有任何規範，根本就是個野生叢林！該部門的主管想建立一套規則來更有系統地管理這些檔案（還有管理這些繪圖人員），因此開了這個需求給我。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="##%E9%9C%80%E6%B1%82%E8%A7%A3%E6%9E%90">需求解析</a></li>
+<li><a href="##%E9%96%8B%E7%99%BC">開發</a></li>
+<li><a href="##%E9%83%A8%E7%BD%B2">部署</a></li>
+</ul>
+<hr>
+<h2 id="需求解析"><a href="#需求解析" class="headerlink" title="需求解析"></a>需求解析</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>（<del>客戶</del>）某部門主管：「可以幫我做一個上傳圖紙到 NAS 的工具嗎？簡單就好，不要花你太多時間。」<br>GK：「（你知道我只是個前端工程師嗎？）好啊，沒問題，你的需求是什麼？」<br>（<del>客戶</del>）某部門主管：「？就是剛剛說的那樣啊…」<br>GK：「？？？哦……好…好吧…」</p>
+<p>由於某些原因，我的部門裡沒有後端工程師，沒有系統分析師，也沒有 DBA，全部都得自己來。幸好經歷過 <a href="https://gkfat.github.io/2021/03/19/system-deploying/">這個歷練</a>，我對於要建立一個系統服務，還算是有點概念。</p>
+<p>看來，這又是天上掉下來的機會，要讓我拓展視野了。</p>
+<h3 id="系統分析"><a href="#系統分析" class="headerlink" title="系統分析"></a>系統分析</h3><p>在開始寫程式之前絕對該做的事，就是系統分析（SA）。首先把我的角色從 <code>產品經理（PM）</code> 切換成 <code>系統分析師（SA）</code>，經過一番思考後，犧牲了不少腦細胞，但也得出以下架構（因為涉及公司隱私，所以公開的部分有簡化過）。</p>
+<h4 id="系統架構"><a href="#系統架構" class="headerlink" title="系統架構"></a>系統架構</h4><table>
+<thead>
+<tr>
+<th>服務</th>
+<th>選擇</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VM</td>
+<td>Linux CenteOS 7（既有）</td>
+</tr>
+<tr>
+<td>Backend Application</td>
+<td>Python3</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MariaDB（既有）</td>
+</tr>
+<tr>
+<td>Web Application</td>
+<td>Angular 11</td>
+</tr>
+<tr>
+<td>HTTP Server</td>
+<td>Apache</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本來是想學著用 Golang 開發的，但為了讓另外幾位 Python 底的工程師也能夠維護或擴充這個服務，就選擇用 Python 了（反正兩個都是從頭學）（<del>但寫完這個專案後我真的是很討厭 Python</del>）。</p>
+</blockquote>
+<h4 id="活動"><a href="#活動" class="headerlink" title="活動"></a>活動</h4><ul>
+<li>上傳檔案功能<ul>
+<li>可將檔案上傳到 NAS 目標資料夾，並儲存紀錄至 DB</li>
+</ul>
+</li>
+<li>查詢紀錄功能<ul>
+<li>可取得 DB 上傳紀錄，並做分頁、排序、篩選</li>
+</ul>
+</li>
+<li>同步 NAS<ul>
+<li>可同步 NAS 上資料夾與 DB 客戶、型號</li>
+</ul>
+</li>
+</ul>
+<h4 id="類別設計"><a href="#類別設計" class="headerlink" title="類別設計"></a>類別設計</h4><ul>
+<li>檔案上傳紀錄類</li>
+<li>客戶類</li>
+<li>型號類</li>
+</ul>
+<h4 id="資料庫設計"><a href="#資料庫設計" class="headerlink" title="資料庫設計"></a>資料庫設計</h4><ul>
+<li>NAS 同步紀錄表</li>
+<li>客戶表</li>
+<li>型號表</li>
+<li>檔案上傳紀錄表</li>
+</ul>
+<h4 id="API-設計"><a href="#API-設計" class="headerlink" title="API 設計"></a>API 設計</h4><ul>
+<li>同步 NAS API</li>
+<li>上傳檔案 API</li>
+<li>查詢紀錄 API</li>
+<li>查詢客戶、型號 API</li>
+</ul>
+<h4 id="介面"><a href="#介面" class="headerlink" title="介面"></a>介面</h4><ul>
+<li>上傳檔案頁面<ul>
+<li>取得客戶、型號</li>
+<li>選擇檔案，組成目標格式</li>
+<li>上傳檔案</li>
+</ul>
+</li>
+<li>查詢紀錄頁面<ul>
+<li>同步 NAS</li>
+<li>查詢上傳紀錄（分頁、排序、篩選）</li>
+</ul>
+</li>
+</ul>
+<p>大致上就完成了一次簡易版 SA 分析，接著就是依據這些規格來開發了（角色切換成 <code>後端工程師(Back End)</code>）。如果開發文件寫得我看不懂，我就定死你 SA！欸，等等，SA 也是我自己？</p>
+<hr>
+<h2 id="開發"><a href="#開發" class="headerlink" title="開發"></a>開發</h2><p>好的，那麼來到了工程師們最喜歡的開發橋段了。有了辛辛苦苦做好的 SA 分析，就可以照著步驟無腦開發了！當然因為一條龍都是我，就沒有把規格訂得太詳細了，開發時再想就好了（這真的不是一個好習慣，後來在整理時發現，要寫 API 文件或後續要再擴充，都要再從程式碼裡找規格）。</p>
+<h3 id="後端開發"><a href="#後端開發" class="headerlink" title="後端開發"></a>後端開發</h3><h4 id="選擇套件"><a href="#選擇套件" class="headerlink" title="選擇套件"></a>選擇套件</h4><p>因為 Python 套件非常多，在網路上查詢整理後，選擇了這幾個套件來做核心處理。</p>
+<table>
+<thead>
+<tr>
+<th>套件</th>
+<th>處理範圍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flask</td>
+<td>http server</td>
+</tr>
+<tr>
+<td>flask-sqlalchemy</td>
+<td>DB 相關操作</td>
+</tr>
+<tr>
+<td>pysmb</td>
+<td>NAS 相關操作</td>
+</tr>
+</tbody></table>
+<h4 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h4><p>愉快的開發時間就咻地略過，來看看完成後的模樣吧。以下是憑<del>直覺</del>後端基礎寫出來的架構。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">file-uploader</span><br><span class="line">|-- app.py                // 專案的進入點，啟動 http server</span><br><span class="line">|-- deploy.sh             // 讓懶人可以一鍵部署到虛擬機的 Shell Script</span><br><span class="line">|-- venv                  // Python 必備虛擬環境，套件都裝在裡面</span><br><span class="line">|-- config                // DB、NAS 連線帳號密碼設定檔</span><br><span class="line">    |-- config.py</span><br><span class="line">|-- connection            // 處理連線，原本裡面有 DB 連線，後來發現不需要</span><br><span class="line">    |-- conNas.py</span><br><span class="line">|-- model                 // Model 與 Table schema</span><br><span class="line">    |-- dbTable.py</span><br><span class="line">|-- view                  // API routes 以及分配到哪個 Controller</span><br><span class="line">    |-- fileUpload.py</span><br><span class="line">|-- controller            // 業務邏輯</span><br><span class="line">    |-- uploadControl.py</span><br><span class="line">    |-- retrieveControl.py</span><br><span class="line">    |-- deleteControl.py</span><br><span class="line">    |-- fetchControl.py</span><br><span class="line">    |-- customerControl.py</span><br><span class="line">    |-- syncControl.py</span><br></pre></td></tr></table></figure>
+
+<p>以上是大致上的專案架構說明，大部分 Controller 都大同小異在對 NAS、DB 做一些基本的 CRUD 操作。比較值得一提的是在 <code>controller/uploadControl.py</code> 裡面對上傳檔案的操作，若一次上傳多個檔案，有開 <code>thread</code> 來並行處理，大概的程式碼如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 上傳檔案</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">UploadFile</span>():</span><br><span class="line">    uploadList = []  // 要上傳的檔案陣列</span><br><span class="line">    </span><br><span class="line">    // 從 API 取出要上傳的檔案，加入 uploadList</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> request.get_json()[<span class="string">&#x27;files&#x27;</span>]:</span><br><span class="line">        uploadList.append(<span class="built_in">dict</span>(</span><br><span class="line">            state = <span class="number">0</span>,    // 檔案上傳成功／失敗狀態</span><br><span class="line">            file  = item</span><br><span class="line">        ))</span><br><span class="line">    </span><br><span class="line">    // 產生多個 Thread，分別執行檔案上傳</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> uplaodList:</span><br><span class="line">       uplaod_thread = threading.Thread(</span><br><span class="line">           target=UploadControl.UploadFileThread,</span><br><span class="line">           args=(item,)   // 少了那個逗號會有問題，我也不曉得為什麼</span><br><span class="line">       )</span><br><span class="line">       file = upload_thread.start()</span><br><span class="line">       </span><br><span class="line">       // 等全部的 thread 都完成後才進行下一步</span><br><span class="line">       uplaod_thread.join()</span><br><span class="line">    </span><br><span class="line">    // 一些跟 DB 有關的操作</span><br><span class="line">    // 回傳 API response</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 每個 Thread 上傳檔案的操作</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">UploadFileThread</span>(<span class="params">file</span>):</span><br><span class="line">    // 一些跟 NAS 有關的操作</span><br><span class="line">    // 回傳檔案上傳結果</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="前端開發"><a href="#前端開發" class="headerlink" title="前端開發"></a>前端開發</h3><p>前端就不是筆記的重點了，就是依 SA 分析的功能來開發。</p>
+<ul>
+<li>Model：用 <code>typescript</code> 的 <code>namespace</code> 來建立類別 struct</li>
+<li>UI：用 Bootstrap 達到最基本的呈現</li>
+<li>UX：跳過 wireframe，靠經驗</li>
+</ul>
+<h4 id="拖曳上傳檔案"><a href="#拖曳上傳檔案" class="headerlink" title="拖曳上傳檔案"></a>拖曳上傳檔案</h4><p>比較值得一提的地方是，這次嘗試用 Angular 的 <code>directive</code> 來製作出「拖曳式上傳檔案」的監聽檔案拖曳區域，內容相當簡易：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dropZone.directive.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Directive</span>, <span class="title class_">HostListener</span>, <span class="title class_">Output</span>, <span class="title class_">EventEmitter</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@angular/core&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span>;</span><br><span class="line"></span><br><span class="line">@<span class="title class_">Directive</span>(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">&#x27;[appDropZone]&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">dropZoneDirective</span> &#123;</span><br><span class="line">  @<span class="title class_">Output</span>() filesDropped = <span class="keyword">new</span> <span class="title class_">EventEmitter</span>&lt;any&gt;();</span><br><span class="line"></span><br><span class="line">  @<span class="title class_">HostListener</span>(<span class="string">&#x27;dragover&#x27;</span>, [<span class="string">&#x27;$event&#x27;</span>]) <span class="title function_">onDragOver</span>(<span class="params">$event: any</span>) &#123;</span><br><span class="line">    $event.<span class="title function_">preventDefault</span>();</span><br><span class="line">    $event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">    $(<span class="string">&#x27;.dropZone&#x27;</span>).<span class="title function_">addClass</span>(<span class="string">&#x27;grayBGC&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="title class_">HostListener</span>(<span class="string">&#x27;dragleave&#x27;</span>, [<span class="string">&#x27;$event&#x27;</span>]) public <span class="title function_">onDragLeave</span>(<span class="params">$event: any</span>) &#123;</span><br><span class="line">    $event.<span class="title function_">preventDefault</span>();</span><br><span class="line">    $event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">    $(<span class="string">&#x27;.dropZone&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;grayBGC&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="title class_">HostListener</span>(<span class="string">&#x27;drop&#x27;</span>, [<span class="string">&#x27;$event&#x27;</span>]) public <span class="title function_">onDrop</span>(<span class="params">$event: any</span>) &#123;</span><br><span class="line">    $event.<span class="title function_">stopPropagation</span>();</span><br><span class="line">    $(<span class="string">&#x27;.dropZone&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;grayBGC&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// upload.html</span></span><br><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;dropZone&quot;</span> *ngIf=<span class="string">&quot;canUpload&quot;</span> appDropZone (filesDropped)=<span class="string">&quot;chooseFile($event)&quot;</span>&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> #<span class="attr">fileDropRef</span> <span class="attr">id</span>=<span class="string">&quot;fileDropRef&quot;</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">multiple</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            (<span class="attr">change</span>)=<span class="string">&quot;chooseFile($event)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h5</span>&gt;</span>拖曳檔案至此處<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;fileDropRef&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        或點擊此處選擇上傳檔案</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>基本上就只是在監聽「拖曳進入」「拖曳離開」事件，為區域加上 css 讓使用者得到回饋，然後在「丟下檔案」的時候，emit 給 <code>upload.ts</code> 的 <code>chooseFile()</code> 接收。</p>
+<p>另外還有用 <code>cdkDropList</code> 結合 <code>bootstrap</code> 卡片呈現，製作出拖拉調整順序的介面。除外的就不值一提，很普通XD。</p>
+<hr>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>後端跟前端都寫好之後，部署的順序如下：</p>
+<ul>
+<li>將後端專案複製到虛擬機專案路徑底下<ul>
+<li>對目標 DB 做 Migration</li>
+<li>Systemctl 建立 service daemon file</li>
+<li>啟用服務</li>
+</ul>
+</li>
+<li>將前端專案複製到虛擬機專案路徑底下<ul>
+<li>設定 Apache proxy，將目標網址導向後端 API 或前端網頁</li>
+<li>設定防火牆，讓使用者能存取 port</li>
+</ul>
+</li>
+</ul>
+<h3 id="Database-Migration"><a href="#Database-Migration" class="headerlink" title="Database Migration"></a>Database Migration</h3><p>在 Migration 這關其實也摸索了滿久的，後來逐漸認知到步驟其實很單純（我用 <code>flask-sqlalchemy</code> 來做 DB Migration）：</p>
+<ul>
+<li><code>flask db migrate</code> 來產生 migration file（比對 <code>dbTable.py</code> 中 table schema 與目標資料庫中的 schema）</li>
+<li>檢查 upgrade file 裡的操作是否都符合需求</li>
+<li><code>flask db upgrade</code> 就 Migrate 成功啦！</li>
+</ul>
+<p>至於 <code>backup</code>、<code>rollback</code>，就之後再考慮吧。</p>
+<h3 id="Linux-Service"><a href="#Linux-Service" class="headerlink" title="Linux Service"></a>Linux Service</h3><blockquote>
+<p>之前有整理過一份 <code>systemctl</code> 的操作，指令都在 <a href="https://gkfat.github.io/2021/08/01/linux-systemctl/">這裡</a>。</p>
+</blockquote>
+<ul>
+<li>在虛擬機建立 system daemon file</li>
+<li><code>systmectl daemon-reload</code> 來載入 service</li>
+<li><code>systemctl start &lt;service&gt;</code> 就啟用服務啦！</li>
+</ul>
+<hr>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>現在回頭看看，2021 年初時我還連 DB 怎麼下 query 都搞不懂，連 Linux 都不會操作，過了半年後，居然能夠一條龍做到下列事項：</p>
+<ul>
+<li>使用 Python 撰寫 http server、撰寫 API 文件、撰寫方便部署的 Shell Script</li>
+<li>串接 MariaDB 資料庫、執行 DB migration、串接 NAS</li>
+<li>使用 Angular 串接 http server</li>
+<li>部署後端服務、前端專案到虛擬機</li>
+<li>設定 Apache、防火牆讓使用者能夠連線</li>
+</ul>
+<p>真的是滿感謝有這個大好機會，讓我對整套專案的執行有了進一步的了解（但不敢說這就叫全端），經過了一兩季後，這個專案也已經逐漸成長到了 1.5 版本，對於後端也愈來愈能理解了。接下來想把重心放在學習 Golang，以及加強後端 Concurrency 處理的觀念。</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.techbridge.cc/2020/02/09/sql-basic-tutorial/" >TechBridge 技術共筆 - 簡明 SQL 資料庫語法入門教學<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：後端學習筆記 - 來寫一個串接 NAS 的檔案管理服務吧！</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2021-09-05 08:31:08</li>
+        <li>
+            永久連結：https://gkfat.github.io/2021/09/05/python-file-upload-service/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BE%8C%E7%AB%AF%E9%96%8B%E7%99%BC/">#後端開發</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Python/">#Python</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/API/">#API</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/NAS/">#NAS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/09/05/golang-basic/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Golang 學習筆記 - 初步接觸 Go!</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/28/git-flow/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git 學習筆記 - 如何使用 Git 做版本控制</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">需求解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">系統分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">系統架構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B4%BB%E5%8B%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">活動</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%9E%E5%88%A5%E8%A8%AD%E8%A8%88"><span class="nav-number">1.2.3.</span> <span class="nav-text">類別設計</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E8%A8%AD%E8%A8%88"><span class="nav-number">1.2.4.</span> <span class="nav-text">資料庫設計</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API-%E8%A8%AD%E8%A8%88"><span class="nav-number">1.2.5.</span> <span class="nav-text">API 設計</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E9%9D%A2"><span class="nav-number">1.2.6.</span> <span class="nav-text">介面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E7%99%BC"><span class="nav-number">2.</span> <span class="nav-text">開發</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%8C%E7%AB%AF%E9%96%8B%E7%99%BC"><span class="nav-number">2.1.</span> <span class="nav-text">後端開發</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%B8%E6%93%87%E5%A5%97%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">選擇套件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E6%9E%B6%E6%A7%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">專案架構</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC"><span class="nav-number">2.2.</span> <span class="nav-text">前端開發</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%96%E6%9B%B3%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88"><span class="nav-number">2.2.1.</span> <span class="nav-text">拖曳上傳檔案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">3.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Database-Migration"><span class="nav-number">3.1.</span> <span class="nav-text">Database Migration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-Service"><span class="nav-number">3.2.</span> <span class="nav-text">Linux Service</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text">結語</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
