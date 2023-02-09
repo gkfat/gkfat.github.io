@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            TypeScript 學習筆記 - 初探 |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">TypeScript 學習筆記 - 初探</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2023-02-09 12:38:12</span>
+        <span class="mobile">2023-02-09 12:38</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/TypeScript/">TypeScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>834 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h6 id="tags-TypeScript"><a href="#tags-TypeScript" class="headerlink" title="tags: TypeScript"></a>tags: <code>TypeScript</code></h6><p>因為專案使用 <code>Angular</code> 的關係，我在開發上逐漸習慣都使用 <code>TypeScript</code>，甚至連近期在練習使用 <code>Node.js</code> 寫後端專案，也會盡可能使用 <code>TypeScript</code>。用習慣了之後，再回去看原生的 <code>JavaScript</code>，總是會感到渾身不對勁。</p>
+<span id="more"></span>
+
+<p>線上測試 <code>TypeScript</code>：<a class="link"   target="_blank" rel="noopener" href="https://www.typescriptlang.org/play" >https://www.typescriptlang.org/play<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<h2 id="什麼是-TypeScript？"><a href="#什麼是-TypeScript？" class="headerlink" title="什麼是 TypeScript？"></a>什麼是 TypeScript？</h2><blockquote>
+<p>一言以蔽之，就是「基於 JavaScript，但能夠定義型別」的程式語言。</p>
+</blockquote>
+<p>當一段程式碼在 <code>JavaScript</code> 長這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> whatIsThis;</span><br><span class="line"><span class="comment">// 經過一串程式碼，塞入了不曉得什麼鬼東西...</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(whatIsThis);</span><br><span class="line"><span class="comment">// 可能是任何東西...</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>TyepScript</code> 中就會長這樣：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">whatIsThis</span>: <span class="built_in">string</span>[];</span><br><span class="line"><span class="comment">// 經過一串程式碼，塞入了不曉得什麼鬼東西...</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(whatIsThis);</span><br><span class="line"><span class="comment">// 你知道他一定是個字串陣列</span></span><br></pre></td></tr></table></figure>
+
+<p><code>TypeScript</code> 的好處就是能夠「清楚地定義型別」，大幅提升程式碼在閱讀與維護上的容易程度。</p>
+<p>剛開始使用 <code>TypeScript</code> 的時候，可能會覺得很麻煩，需要多寫一堆程式碼來定義明擺著的事實，但當專案變大、程式碼變長了之後，你會逐漸發覺很多錯誤都能提早避免，而不是等到要 run code 的時候才報錯。</p>
+<hr>
+<h2 id="Enum-amp-Interface-amp-Class"><a href="#Enum-amp-Interface-amp-Class" class="headerlink" title="Enum &amp; Interface &amp; Class"></a>Enum &amp; Interface &amp; Class</h2><p>不僅在維護上，使用 <code>TypeScript</code> 也能讓開發更有效率。舉例來說：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定義一個 Book 介面</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Book</span> &#123;</span><br><span class="line">    <span class="attr">author</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">pages</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定義一個 Library 類別</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Library</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">books</span>: <span class="title class_">Book</span>[] = [];</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">books: Book[]</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">books</span> = books;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取得所有的 Book</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">getBooks</span>(): <span class="title class_">Book</span>[] &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">books</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 增加新的 Book</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">addBook</span>(<span class="attr">newBook</span>: <span class="title class_">Book</span>): <span class="title class_">Book</span>[] &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">books</span>.<span class="title function_">push</span>(newBook);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">books</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定義 books 的型別為 Book[]，在建立內容時 TypeScript 就會檢查是否符合 Book 屬性</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">books</span>: <span class="title class_">Book</span>[] = [</span><br><span class="line">    &#123;<span class="attr">author</span>: <span class="string">&#x27;John&#x27;</span>, <span class="attr">pages</span>: <span class="number">20</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">author</span>: <span class="string">&#x27;Jane&#x27;</span>, <span class="attr">pages</span>: <span class="number">50</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">author</span>: <span class="string">&#x27;Peter&#x27;</span>, <span class="attr">pages</span>: <span class="number">100</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;Hello&#x27;</span>, <span class="attr">pages</span>: <span class="number">10</span>&#125; <span class="comment">// 會因為 Book 介面沒有 name 屬性而報錯，在開發期間就知道這裡會有錯誤</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">let</span> library = <span class="keyword">new</span> <span class="title class_">Library</span>(books);</span><br><span class="line">library.<span class="title function_">getBooks</span>();</span><br></pre></td></tr></table></figure>
+
+<p>或者可以更方便地使用繼承／擴充，讓程式碼更結構化：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 enum 直接依順序列舉</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">LegsEnum</span> &#123;</span><br><span class="line">    noLeg,   <span class="comment">// 0</span></span><br><span class="line">    twoLegs, <span class="comment">// 1</span></span><br><span class="line">    fourLegs <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="attr">legsType</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">canFly</span>: <span class="built_in">boolean</span>;</span><br><span class="line">    <span class="title function_">sound</span>(): <span class="built_in">string</span>; <span class="comment">// Animal 天生就可以叫</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Snake</span> <span class="keyword">implements</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    legsType = <span class="title class_">LegsEnum</span>.<span class="property">noLeg</span>; <span class="comment">// 可以直接指派 enum 的值，legsType === 0</span></span><br><span class="line">    canFly = <span class="literal">false</span>;</span><br><span class="line">    <span class="title function_">sound</span>(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;sss&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">implements</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    legsType = <span class="title class_">LegsEnum</span>.<span class="property">twoLegs</span>;</span><br><span class="line">    canFly = <span class="literal">false</span>;</span><br><span class="line">    <span class="title function_">sound</span>(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;bark bark&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bird</span> <span class="keyword">implements</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    legsType = <span class="title class_">LegsEnum</span>.<span class="property">twoLegs</span>;</span><br><span class="line">    canFly = <span class="literal">true</span>;</span><br><span class="line">    <span class="title function_">sound</span>(): <span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;jo jo&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如此一來，看著程式碼就可以很迅速地理解各種類別帶有的屬性及方法，光是這點就足以預防很多笨笨的錯誤了。</p>
+<p>在開發時，<code>TypeScript</code> 也會幫你列出正在使用的類別所帶有的屬性及方法，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bird1 = <span class="keyword">new</span> <span class="title class_">Bird</span>();</span><br><span class="line">bird1. <span class="comment">// 當程式碼寫到這裡時，會列出以下東西</span></span><br><span class="line"><span class="comment">// bird1.legsType</span></span><br><span class="line"><span class="comment">// bird1.canFly</span></span><br><span class="line"><span class="comment">// bird1.sound</span></span><br></pre></td></tr></table></figure>
+
+<p>實在是相當便利。</p>
+<p>另外一個好處是，當程式碼需要改動時，<code>TypeScript</code> 會自動檢查出還有哪些地方是需要修正的，不會在程式碼上線時才 crash。</p>
+<p><code>TypeScript</code> 真的是個好東西，尤其對於想把程式碼定義清楚的人而言，尤其推薦！</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.sanity.io/typescript-guide/typescript-vs-javascript" >What are the differences between TypeScript and JavaScript?<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://betterprogramming.pub/introduction-to-typescript-interfaces-extending-interfaces-and-classes-af10fcfc1238" >An Introduction to TypeScript Interfaces<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：TypeScript 學習筆記 - 初探</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2023-02-09 12:38:12</li>
+        <li>
+            永久連結：https://gkfat.github.io/2023/02/09/typescript-basic/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/TypeScript/">#TypeScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/03/Angular-RxJS/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Angular 學習筆記 - RxJS</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#tags-TypeScript"><span class="nav-number">1.</span> <span class="nav-text">tags: TypeScript</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-TypeScript%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">什麼是 TypeScript？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enum-amp-Interface-amp-Class"><span class="nav-number"></span> <span class="nav-text">Enum &amp; Interface &amp; Class</span></a>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
