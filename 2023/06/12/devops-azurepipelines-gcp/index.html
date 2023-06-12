@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Gkfat">
+    
+    <title>
+        
+            DevOps 學習筆記 - AzurePipelines、Docker、GCP |
+        
+        Gk&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"gkfat.github.io","root":"/","language":"zh-TW","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/gkfat.png","favicon":"/images/logo.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"在成為全端工程師的路上，以微小而堅定的步伐，努力邁進。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分鐘前","hour":"%s 小時前","day":"%s 天前","week":"%s 周前","month":"%s 個月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Gk&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">DevOps 學習筆記 - AzurePipelines、Docker、GCP</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/gkfat.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Gkfat</span>
+                        
+                            <span class="author-label">全端打雜工</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2023-06-12 21:38:12</span>
+        <span class="mobile">2023-06-12 21:38</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/DevOps/">DevOps</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/AzurePipelines/">AzurePipelines</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/GCP/">GCP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>618 字數</span>
+        </span>
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>近期在公司內接觸到了部署測試站的流程，有別於以往直接通通 <code>scp</code> 過去 VM 的暴力方式，這裡採用的是 <code>AzurePipelines</code>、<code>Docker</code>、<code>GCP</code> 之間的半自動化協作，看來正在往 CI&#x2F;CD 的路上發展。藉此機會，將學到的一些東西整理起來。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="整合部署流程"><a href="#整合部署流程" class="headerlink" title="整合部署流程"></a>整合部署流程</h2><p>由於前人並沒有留下很明確的文件，許多步驟都是靠看程式碼推敲出來的，這條路真的是不好走，不過終究是整理出來了。從開發到部署的流程如下：</p>
+<h3 id="1-RD-開發與測試"><a href="#1-RD-開發與測試" class="headerlink" title="1. RD 開發與測試"></a>1. RD 開發與測試</h3><ol>
+<li>從 <code>Azure</code> 專案倉庫 clone 程式碼到本地</li>
+<li>Check out feature branch 進行開發</li>
+<li>開發完成後，將分支進度推上 origin</li>
+<li>連線至 VM 的 <code>Jenkins</code>，使用分支建置</li>
+<li>部署 Dev 完成</li>
+</ol>
+<p>這裡使用的是 <code>Jenkins</code> 搭配 <code>Azure</code> 版控的組合，讓開發者可以隨選分支進行建置，<code>Jenkins</code> 會負責將程式碼抓下來，啟動服務。</p>
+<h3 id="2-部署測試站"><a href="#2-部署測試站" class="headerlink" title="2. 部署測試站"></a>2. 部署測試站</h3><ol>
+<li>將 feature 分支合併進 <code>dev</code>，<code>dev</code> 開 PR 合併進 <code>master</code></li>
+<li><code>master</code> 變更會觸發 <code>Azure pipelines</code> 依專案內 <code>azure-pipelines.yml</code> 執行下列動作：<ul>
+<li>打包 Docker Image</li>
+<li>推送到 GCP containerRegistry</li>
+<li>於 <code>master</code> 分支加上版號 tag</li>
+</ul>
+</li>
+<li>手動更新 k8s 配置檔，要變更的服務指向新 image tag</li>
+<li>使用 <code>gcloud</code> <code>kubectl</code> delete &amp; apply k8s 配置檔</li>
+<li>部署測試站完成</li>
+</ol>
+<p>在部署測試站之前，需要先了解下列基礎知識：</p>
+<ul>
+<li>Docker</li>
+<li>Azure Pipelines</li>
+<li>GCP、gcloud、kubectl</li>
+</ul>
+<hr>
+<h2 id="相關操作整理"><a href="#相關操作整理" class="headerlink" title="相關操作整理"></a>相關操作整理</h2><h3 id="1-Docker"><a href="#1-Docker" class="headerlink" title="1. Docker"></a>1. Docker</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 列出所有 container</span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">// 列出所有 image</span><br><span class="line">docker images</span><br><span class="line"></span><br><span class="line">// 從 docker hub 上拉下 image</span><br><span class="line">docker pull &#123;image_name&#125;</span><br><span class="line"></span><br><span class="line">// 將 image 啟動為 container</span><br><span class="line">docker run --name &#123;container_name&#125; -p &#123;container_port&#125;:&#123;tcp_port&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Azure-pipelines"><a href="#2-Azure-pipelines" class="headerlink" title="2. Azure pipelines"></a>2. Azure pipelines</h3><p>Azure Pipelines 上有明確的步驟教學，只要照著做就能夠產出一份 yml 檔了。</p>
+<h3 id="2-GCP、gcloud、kubectl"><a href="#2-GCP、gcloud、kubectl" class="headerlink" title="2. GCP、gcloud、kubectl"></a>2. GCP、gcloud、kubectl</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 安裝 gcloud SDK</span><br><span class="line">https://cloud.google.com/sdk/docs/install</span><br><span class="line"></span><br><span class="line">// gcloud 安裝 kubectl</span><br><span class="line">gcloud components install kubectl</span><br><span class="line"></span><br><span class="line">// 若要在本地執行, 需先驗證 gcloud, 或使用 GCP Cloud Shell</span><br><span class="line">gcloud auth login</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 更新 k8s 配置檔並運行 service</span><br><span class="line"> */</span><br><span class="line">// 將配置檔拉到本地</span><br><span class="line">git clone $&#123;Azure_ops_repo&#125;</span><br><span class="line"></span><br><span class="line">// 呼叫 k8s 移除指定資料夾下的設定檔</span><br><span class="line">// kubectl delete ([-f FILENAME] | [-k DIRECTORY] | TYPE [(NAME | -l label | --all)]) [options]</span><br><span class="line">kubectl delete -k .</span><br><span class="line"></span><br><span class="line">// 呼叫 k8s 套用指定資料夾下的配置檔並運行 service</span><br><span class="line">// kubectl apply (-f FILENAME | -k DIRECTORY) [options]</span><br><span class="line">kubectl apply -k .</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10199339" >it邦幫忙 - Docker 基本教學<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10206169" >it邦幫忙 - 持續整合 - Azure Pipelines of Azure DevOps<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10193961" >it邦幫忙 - 漫步在雲端：在 GCP 中建立 k8s 叢集<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>文章標題：DevOps 學習筆記 - AzurePipelines、Docker、GCP</li>
+        <li>文章作者：Gkfat</li>
+        <li>撰寫時間：2023-06-12 21:38:12</li>
+        <li>
+            永久連結：https://gkfat.github.io/2023/06/12/devops-azurepipelines-gcp/
+        </li>
+        <li>
+            版權宣告：這個網站所有文章均使用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 授權。
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/DevOps/">#DevOps</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/AzurePipelines/">#AzurePipelines</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/GCP/">#GCP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2023/02/09/typescript-basic/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">TypeScript 學習筆記 - 初探</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Gkfat</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        閱覽&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">整合部署流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RD-%E9%96%8B%E7%99%BC%E8%88%87%E6%B8%AC%E8%A9%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1. RD 開發與測試</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%83%A8%E7%BD%B2%E6%B8%AC%E8%A9%A6%E7%AB%99"><span class="nav-number">1.2.</span> <span class="nav-text">2. 部署測試站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">相關操作整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Docker"><span class="nav-number">2.1.</span> <span class="nav-text">1. Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Azure-pipelines"><span class="nav-number">2.2.</span> <span class="nav-text">2. Azure pipelines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GCP%E3%80%81gcloud%E3%80%81kubectl"><span class="nav-number">2.3.</span> <span class="nav-text">2. GCP、gcloud、kubectl</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
